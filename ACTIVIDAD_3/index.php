@@ -28,7 +28,7 @@
     </script>
 </head>
 <body>
-    	<center><h1>SUCURSALES</h1><center>
+    	
     	 <div class="menu">   
             <ul class="links">
                 <li><a href="select.php"><input id="input_head" type="submit" value="Ver stock de sucursales"></a></li>
