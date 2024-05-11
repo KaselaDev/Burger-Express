@@ -68,7 +68,7 @@
               data: {
                 labels: nombreStock,
                 datasets: [{
-                  label: '# of Votes',
+                  label: 'Cantidad',
                   data: dataStock,
                   backgroundColor: stockColor,
                   borderWidth: 0
