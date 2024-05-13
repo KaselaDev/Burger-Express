@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2024 a las 02:10:41
+-- Tiempo de generación: 14-05-2024 a las 00:20:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,10 +28,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sucursales` (
-  `Cod_sucursal` varchar(20) NOT NULL,
+  `Cod_sucursal` int(20) NOT NULL,
   `Direccion` varchar(40) NOT NULL,
-  `Capacidad` int(10) NOT NULL
+  `Capacidad` int(10) NOT NULL,
+  `Cod_supervisor` varchar(28) NOT NULL,
+  `Fecha` date NOT NULL,
+  `Cant_empleados` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`Cod_sucursal`, `Direccion`, `Capacidad`, `Cod_supervisor`, `Fecha`, `Cant_empleados`) VALUES
+(1, 'bogota 3310', 0, '', '0000-00-00', 0),
+(2, 'weg', 23, '32', '2012-12-23', 4354),
+(3, 'las hayas 20', 123, '', '0000-00-00', 22);
 
 --
 -- Índices para tablas volcadas
