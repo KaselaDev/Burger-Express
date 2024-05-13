@@ -39,7 +39,7 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`Cod_producto`, `Nombre`, `Cantidad`, `codColor`) VALUES
-('100', 'Paty', '100', '240f00'),
+('100', 'Paty', '120', '240f00'),
 ('101', 'Pan', '150', 'ffe6ad'),
 ('102', 'Cheddar', '250', 'ffb300'),
 ('103', 'Lechuga', '350', '007d0a'),
