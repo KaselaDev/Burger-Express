@@ -1,29 +1,20 @@
 <?php
 #ACA VAN LAS CONSULTAS SQL
-	function delete_suc($cod){
+	function deleteSucursal($cod){
 		require'conexion.php';
 		$consulta=$conexion->prepare("DELETE FROM sucursales WHERE Cod_sucursal=:cod");
 	    $consulta->bindParam(":cod",$cod);
 	    $consulta->execute();
 	}
-
-	function search($cod){
+	function getSucursales($one=" "){
 		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM sucursales WHERE `Cod_sucursal` = '$cod'");
+		$consulta = $conexion->prepare("SELECT * FROM sucursales $one");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
 
-	function view_sucursales(){
-		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM sucursales");
-		$consulta->execute();
-		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
-	}
-
-	function modify($dire,$capa,$co,$fecha,$cant,$cod){
+	function updateSucursal($dire,$capa,$co,$fecha,$cant,$cod){
 		require'conexion.php';
 		$change=$conexion->prepare("UPDATE sucursales SET Direccion=:dir, Capacidad=:cap, Cod_supervisor=:cod_s, Fecha=:fec, Cant_empleados=:c_e WHERE sucursales.Cod_sucursal= :code ");
 	    $change->bindParam(':dir',$dire);
@@ -35,7 +26,7 @@
 	    $change->execute();
 	}
 
-	function add_sucursal($dir,$cap,$cant){
+	function postSucursal($dir,$cap,$cant){
 		require'conexion.php';
 		$consulta = $conexion->prepare("SELECT Cod_sucursal FROM sucursales");
 		$consulta->execute();

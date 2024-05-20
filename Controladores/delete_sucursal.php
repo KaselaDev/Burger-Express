@@ -5,7 +5,7 @@
 	require'../Modelos/consultas.php';
 	$cod=filter_input(INPUT_GET, 'codigo');
 	if(isset($cod)){
-		delete_suc($cod);
+		deleteSucursal($cod);
 	}else{
 		header('location:../Vistas/index.php');
 	}

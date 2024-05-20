@@ -9,7 +9,7 @@
 	$direccion = filter_input(INPUT_POST, 'dir');
 	$capacidad = filter_input(INPUT_POST, 'cap');
 	$cantidad = filter_input(INPUT_POST, 'cant');
-	add_sucursal($direccion,$capacidad,$cantidad);
+	postSucursal($direccion,$capacidad,$cantidad);
 		
 ?>
 
