@@ -8,7 +8,7 @@
 	}
 
 	function search($cod){
-		require'conexion.php';
+		require 'conexion.php';
 		$consulta = $conexion->prepare("SELECT * FROM sucursales WHERE `Cod_sucursal` = '$cod'");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -16,7 +16,7 @@
 	}
 
 	function view_sucursales(){
-		require'conexion.php';
+		require 'conexion.php';
 		$consulta = $conexion->prepare("SELECT * FROM sucursales");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@
 	}
 
 	function modify($dire,$capa,$co,$fecha,$cant,$cod){
-		require'conexion.php';
+		require 'conexion.php';
 		$change=$conexion->prepare("UPDATE sucursales SET Direccion=:dir, Capacidad=:cap, Cod_supervisor=:cod_s, Fecha=:fec, Cant_empleados=:c_e WHERE sucursales.Cod_sucursal= :code ");
 	    $change->bindParam(':dir',$dire);
 	    $change->bindParam(':cap',$capa);
@@ -36,7 +36,7 @@
 	}
 
 	function add_sucursal($dir,$cap,$cant){
-		require'conexion.php';
+		require 'conexion.php';
 		$consulta = $conexion->prepare("SELECT Cod_sucursal FROM sucursales");
 		$consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -53,5 +53,15 @@
 		$insert->bindParam(':can',$cant);
 		$insert->bindParam(':fec',$fecha);
 		$insert->execute();
+	
+	}
+	function userExists($DNI, $Clave) {
+     require 'conexion.php';
+	 $consulta = $conexion->prepare("SELECT * FROM Empleados WHERE $DNI=DNI AND $Clave=Clave");
+	 $consulta->execute();
+	 $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
 	}
 ?>
+
+
