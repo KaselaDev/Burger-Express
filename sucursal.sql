@@ -60,17 +60,17 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`) VALUES
-(1, 1, 'big mc ', '1', '2024-05-13', 'Negro'),
-(2, 1, 'pancho', '3', '2024-05-13', 'Negro'),
-(3, 1, 'coca-cola', '2', '2024-05-13', 'Negro'),
-(4, 1, 'helado', '1', '2024-05-13', 'Negro'),
-(5, 2, 'cuarto libra', '1', '2024-05-13', 'Kasela'),
-(6, 2, 'fanta', '1', '2024-05-13', 'Kasela'),
-(7, 2, 'helado', '2', '2024-05-13', 'Kasela'),
-(8, 3, 'pancho', '5', '2024-05-13', 'Negro'),
-(9, 4, 'doble mc', '2', '2024-05-13', 'Michi'),
-(10, 4, 'coca-cola', '2', '2024-05-13', 'Michi'),
-(11, 5, 'helado', '1', '2024-05-13', 'Galasso');
+(1001, 1, 'big mc ', '1', '2024-05-13', 'Negro'),
+(1002, 1, 'pancho', '3', '2024-05-13', 'Negro'),
+(1003, 1, 'coca-cola', '2', '2024-05-13', 'Negro'),
+(1004, 1, 'helado', '1', '2024-05-13', 'Negro'),
+(1005, 2, 'cuarto libra', '1', '2024-05-13', 'Kasela'),
+(1006, 2, 'fanta', '1', '2024-05-13', 'Kasela'),
+(1007, 2, 'helado', '1', '2024-05-13', 'Kasela'),
+(1008, 3, 'pancho', '5', '2024-05-13', 'Negro'),
+(1009, 4, 'doble mc', '2', '2024-05-13', 'Michi'),
+(1010, 4, 'coca-cola', '2', '2024-05-13', 'Michi'),
+(1011, 5, 'helado', '1', '2024-05-13', 'Galasso');
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `Cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Cod_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1012;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
