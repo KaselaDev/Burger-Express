@@ -18,24 +18,29 @@
 </nav>
 </html>
 <?php
+#DNI	Nombre	Apellido	Telefono	Direccion	Ingreso	Fnac	Turno	Puesto	Sueldo	
 	require'../Modelos/consultas.php';
-	echo"<table id='table'border='1'><thead><th>Cod. Sucursal</th><th>Direccion</th><th>Capacidad</th><th>Fecha de alta</th><th>Empleado a cargo</th><th>Cantidad de empleados</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
+	echo"<table id='table'border='1'><thead><th>DNI</th><th>Nombre</th><th>Apellido</th><th>Telefono</th><th>Direccion</th><th>Fecha ing.</th><th>Fecha nac.</th><th>Turno</th><th>Puesto</th><th>Sueldo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
 	if(isset($_GET['mod'])){
 		$cod = $_GET['codigo'];
-		$datos=getSucursales("WHERE `Cod_sucursal` = '$cod'");
+		$datos=search($cod);
 		$a="";
 		foreach ($datos as $elemento) {
-			$a=$elemento['Cod_sucursal'];
-			$a=$a.",".'"'.$elemento['Direccion'].'"';
-			$a=$a.",".$elemento['Capacidad'];
-			$a=$a.",".'"'.$elemento['Cod_supervisor'].'"';
-			$a=$a.",".'"'.$elemento['Fecha'].'"';
-			$a=$a.",".$elemento['Cant_empleados'];
+			$a=$elemento['DNI'];
+			$a=$a.',"'.$elemento['Nombre'].'"';
+			$a=$a.",".$elemento['Apellido'];
+			$a=$a.',"'.$elemento['Telefono'].'"';
+			$a=$a.',"'.$elemento['Direccion'].'"';
+			$a=$a.',"'.$elemento['Ingreso'].'"';
+			$a=$a.',"'.$elemento['Fnac'].'"';
+			$a=$a.',"'.$elemento['Turno'].'"';
+			$a=$a.',"'.$elemento['Puesto'].'"';
+			$a=$a.',"'.$elemento['Sueldo'].'"';
+
 		}
-		
-		echo"<script>modificar(".$a.")</script>";		
+		echo"<script>modificar_empleado(".$a.")</script>";		
 	}
-		$datos=getSucursales();
+		$datos=view_sucursales();
 		if(empty($datos)){
 			echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 			echo'<script type="text/javascript">

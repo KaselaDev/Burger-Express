@@ -1,41 +1,50 @@
 function eliminar(cod){
     Swal.fire({
-		title: "Realmente desea eliminar esta sucursal?",
+		title: "Realmente desea eliminar este empleados?",
 		text: "",
 		icon: "warning",
 		showCancelButton: true,
 		confirmButtonColor: "#3085d6",
 		cancelButtonColor: "#d33",
-		confirmButtonText: "Si, Eliminarla!"
+		confirmButtonText: "Si, Eliminar!"
     }).then((result) => {
     if (result.isConfirmed) {
-    	window.location.href = `delete_sucursal.php?codigo=${cod}`
+    	window.location.href = `delete_empleado.php?codigo=${cod}`
 
     	}
     });
 }
 function modificar(a, b, c, d, e, f){
-    const contenido= `<form action='modify.php?cod=${a}&table=sucursales' method="post">
-        Direccion:
+    const contenido= `<form action='modify_empleado.php?cod=${a}' method="post">
+        Nombre:
         <p>
-        <input type="text" name="direccion" placeholder="${b}" class="swal2-input">
+        <input type="text" name="nombre" placeholder="${b}" class="swal2-input">
         <p>
-        Capacidad:
+        Apellido:
         <p>
-         <input type="text" name="capacidad" placeholder="${c}" class="swal2-input">
+         <input type="text" name="apellido" placeholder="${c}" class="swal2-input">
         <p> 
-        Supervisor
+        DNI    Nombre  Apellido    Telefono    Direccion   Ingreso Fnac    Turno   Puesto  Sueldo  
+        Telefono
         <p>
-         <input type="text" name="supervisor" placeholder="${d}" class="swal2-input" >
+         <input type="text" name="telefono" placeholder="${d}" class="swal2-input" >
         <p>
-        Fecha
+        Direccion
         <p>
-        <input type="date" name="fecha" placeholder="${e}" class="swal2-input">
+        <input type="text" name="direccion" placeholder="${e}" class="swal2-input">
         <p>
-        Cantidad de empleados
+        Turno
         <p>
-         <input type="text" name="cant" placeholder="${f}" class="swal2-input">
+         <input type="text" name="turno" placeholder="${f}" class="swal2-input">
         <p>
+        Puesto
+        <p>
+         <input type="text" name="puesto" placeholder="${f}" class="swal2-input">
+        <p>
+        Sueldo
+        <p>
+         <input type="text" name="sueldo" placeholder="${f}" class="swal2-input">
+        <p> 
         <button type="submit" class="buton-carrito-r">Modificar</button>
         </form>
         <p style="margin-top:10px;">
