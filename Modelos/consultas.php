@@ -44,5 +44,15 @@
 		$insert->bindParam(':can',$cant);
 		$insert->bindParam(':fec',$fecha);
 		$insert->execute();
+	
+	}
+	function userExists($DNI, $Clave) {
+     require 'conexion.php';
+	 $consulta = $conexion->prepare("SELECT * FROM Empleados WHERE $DNI=DNI AND $Clave=Clave");
+	 $consulta->execute();
+	 $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
 	}
 ?>
+
+
