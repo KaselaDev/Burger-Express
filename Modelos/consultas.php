@@ -53,6 +53,14 @@
 	 $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
+	function getVentas(){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM pedido");
+		$consulta->execute();
+        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
+
 ?>
 
 
