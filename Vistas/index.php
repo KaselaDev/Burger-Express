@@ -1,29 +1,31 @@
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../Vistas/styles/login.css">
+    <title>Tienda</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
 </head>
-
 <body>
-<center><div class="mainbox">
-		<form action="../Controladores/login.php" method="post">
-			<h1>Inicia Sesion</h1>
-
-			<div class="input-box">
-				<input type="text" name="DNI" maxlength="10" placeholder="DNI" required>
-				<i class='bx bxs-user'></i>
-			</div>
-			<div class="input-box">
-				<input type="Password" name="Clave" placeholder="Contraseña" required>
-				<i class='bx bxs-lock-alt'></i>
-			</div>
-            <div class="boton">
-				<button type="submit" class="btn">Ingresar</button>
-			</div>
-		</form>
-	</center>
+    <section class="menu">
+        <a href="" class="inicio">
+            <span class="material-symbols-outlined">domain</span>
+            <h2>Sucursales</h2>
+        </a>
+        <a href="" class="inicio">
+            <span class="material-symbols-outlined">groups</span>
+            <h2>Empleados</h2>
+        </a>
+        <a href="menu_productos.php" class="inicio">
+            <span class="material-symbols-outlined">add_box</span>
+            <h2>Producto</h2>
+        </a>
+        <a href="" class="inicio">
+            <span class="material-symbols-outlined">monitoring</span>
+            <h2>Stock</h2>
+        </a>
+    </section>
 </body>
 </html>

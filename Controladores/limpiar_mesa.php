@@ -4,6 +4,6 @@
 	$mesa=filter_input(INPUT_GET, 'ubi');
 	echo $mesa;
 
-	estado_mesa(1,$mesa,"ocupada");
+	estado_mesa(1,$mesa,"libre");
 	header("Location:../Vistas/user/menu_pedidos.php");
  ?>
