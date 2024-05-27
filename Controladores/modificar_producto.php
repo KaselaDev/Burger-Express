@@ -6,6 +6,6 @@
 	$descri=filter_input(INPUT_GET, 'nuev_descrip');
 	$precio=filter_input(INPUT_GET, 'nuev_precio');		
 
-	modificar_producto($ubica,$nombre,$descri,$precio);
+	update_producto($ubica,$nombre,$descri,$precio);
 	header("Location:../Vistas/listado_producto.php");
  ?>

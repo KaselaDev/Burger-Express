@@ -16,7 +16,7 @@
 						header("Location:../Vistas/user/tomar_pedido.php?nom=".$key['cliente']."&mesa=".$key['mesa']."&id=".$key['idPedido']."");	
 					}//si la cantidad del producto es 1 lo borre
 					else{////si la cantidad del producto mayor 1 que lo reste
-						modificar_pedido($key['Cod_pedido'],$key['idPedido'],$key['producto'],$key['cantidad']-1);
+						update_pedido($key['Cod_pedido'],$key['idPedido'],$key['producto'],$key['cantidad']-1);
 						header("Location:../Vistas/user/tomar_pedido.php?nom=".$key['cliente']."&mesa=".$key['mesa']."&id=".$key['idPedido']."");	
 					}////si la cantidad del producto mayor 1 que lo reste
 				}//Si el producto se repite sume la cantidad
