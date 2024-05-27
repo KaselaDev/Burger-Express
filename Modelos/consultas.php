@@ -1,18 +1,10 @@
 <?php
 #ACA VAN LAS CONSULTAS SQL
-	function delete($cod){
+	function delete_producto($cod){
 		require'conexion.php';
 		$consulta=$conexion->prepare("DELETE FROM productos WHERE Id_producto=:cod");
 	    $consulta->bindParam(":cod",$cod);
 	    $consulta->execute();
-	}
-
-	function search($cod){
-		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM sucursales WHERE `Cod_sucursal` = '$cod'");
-		$consulta->execute();
-		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
 	}
 
 	function view_tabla($nombre){
@@ -24,7 +16,7 @@
 	}
 
 	//FUNCIONES PRODUCTOS
-	function modificar_producto($id,$nombre,$descri,$precio){
+	function update_producto($id,$nombre,$descri,$precio){
 		require'conexion.php';
 		$consulta=$conexion->prepare(" UPDATE productos SET Nombre=:nom, Descripcion=:des, Costo=:pre WHERE productos.Id_producto=:id;");	    
 		$consulta->bindParam(':nom',$nombre);
@@ -34,7 +26,7 @@
 	    $consulta->execute();
 	}
 
-	function agregar_producto($nombre,$descri,$precio){
+	function insert_producto($nombre,$descri,$precio){
 		require'conexion.php';
 		$consulta = $conexion->prepare("SELECT Id_producto FROM productos");
 		$consulta->execute();
@@ -83,7 +75,7 @@
 	    return $consulta->execute();
 	}
 
-	function modificar_pedido($cod,$id,$producto,$cant){
+	function update_pedido($cod,$id,$producto,$cant){
 		require'conexion.php';
 		$consulta=$conexion->prepare(" UPDATE pedido SET idPedido=:id, producto=:pro, cantidad=:cant WHERE pedido.Cod_pedido=:cod;");
 	    $consulta->bindParam(':cant',$cant);

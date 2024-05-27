@@ -11,7 +11,7 @@
 	foreach ($tablaPedido as $key) {//Foreach recorre tabla 'pedido'
 		if ($idPedido == $key['idPedido']) {//Si el idPedido coincide
 			if ($producto == $key['producto']) {//Si el producto se repite sume la cantidad
-				modificar_pedido($key['Cod_pedido'],$key['idPedido'],$key['producto'],$key['cantidad']+1);
+				update_pedido($key['Cod_pedido'],$key['idPedido'],$key['producto'],$key['cantidad']+1);
 				$val=false;
 			}//Si el producto se repite sume la cantidad
 		}//Si el idPedido coincide

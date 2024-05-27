@@ -5,7 +5,7 @@
 	$descri=filter_input(INPUT_GET, 'ing_des');
 	$precio=filter_input(INPUT_GET, 'ing_pre');
 	
-	$res_consul = agregar_producto($nombre,$descri,$precio);
+	$res_consul = insert_producto($nombre,$descri,$precio);
 
 	echo $res_consul;
 	if ($res_consul) {
