@@ -40,7 +40,7 @@
 		}
 		echo"<script>modificar_empleado(".$a.")</script>";		
 	}
-		$datos=view_sucursales();
+		$datos=viewEmpleados();
 		if(empty($datos)){
 			echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 			echo'<script type="text/javascript">

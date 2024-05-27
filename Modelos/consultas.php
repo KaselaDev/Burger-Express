@@ -1,5 +1,5 @@
 <?php
-#ACA VAN LAS CONSULTAS SQL
+#Functions of sucursal
 	function deleteSucursal($cod){
 		require'conexion.php';
 		$consulta=$conexion->prepare("DELETE FROM sucursales WHERE Cod_sucursal=:cod");
@@ -44,5 +44,112 @@
 		$insert->bindParam(':can',$cant);
 		$insert->bindParam(':fec',$fecha);
 		$insert->execute();
+	}
+#functions of empleado
+	function deleteEmpleado($id){
+		require'conexion.php';
+		$consulta=$conexion->prepare("DELETE FROM empleados WHERE id_empleado=:id");
+	    $consulta->bindParam(":id",$id);
+	    $consulta->execute();
+	}
+	function getEmpleados($one=" "){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM empleados $one");
+		$consulta->execute();
+		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
+
+	function updateEmpleado($id,$dni,$name,$ape,$tel,$dir,$ing,$fn,$tur,$puesto,$sueldo){
+		require'conexion.php';
+		$change=$conexion->prepare("UPDATE empleados SET Nombre=:name, Apellido=:ape, Telefono=:tel, Direccion=:dir, Ingreso=:ing, Fnac=:fn, Turno=:tur, Puesto=:puesto, Sueldo=:sueldo, DNI=:dni WHERE empleados.id_empleado= :id ");
+	    $change->bindParam(':id',$id);
+	    $change->bindParam(':dni',$dni);
+	    $change->bindParam(':name',$name);
+	    $change->bindParam(':ape',$ape);
+	    $change->bindParam(':tel',$tel);
+	    $change->bindParam(':dir',$dir);
+	    $change->bindParam(':ing',$ing);
+	   	$change->bindParam(':fn',$fn);
+	    $change->bindParam(':tur',$tur);
+	    $change->bindParam(':puesto',$puesto);
+	    $change->bindParam(':sueldo',$sueldo);
+	    $change->execute();
+	}
+
+	function postEmpleado($id,$dni,$name,$ape,$tel,$dir,$ing,$fn,$tur,$puesto,$sueldo){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT  FROM empleados");
+		$consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        foreach($datos as $elemento){
+        	$codigo = $elemento['Cod_sucursal'];
+        }
+        $codigo++;
+        date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
+		$fecha = date("d-m-Y");
+		$insert = $conexion->prepare("INSERT INTO `empleados` (`Cod_sucursal`,`Direccion`,`Capacidad`,`Cant_empleados`,`Fecha`) VALUES (:cod, :dir, :cap, :can, :fec)");
+		$insert->bindParam(':id',$id);
+	    $insert->bindParam(':dni',$dni);
+	    $insert->bindParam(':name',$name);
+	    $insert->bindParam(':ape',$ape);
+	    $insert->bindParam(':tel',$tel);
+	    $insert->bindParam(':dir',$dir);
+	    $insert->bindParam(':ing',$ing);
+	   	$insert->bindParam(':fn',$fn);
+	    $insert->bindParam(':tur',$tur);
+	    $insert->bindParam(':puesto',$puesto);
+	    $insert->bindParam(':sueldo',$sueldo);
+		$insert->execute();
+	}
+	function getVentas(){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM pedido");
+		$consulta->execute();
+        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
+
+	#functions of pedidos
+	function postPedido($name,$prod,$info){
+		require'conexion.php';
+		$insert = $conexion-> prepare("INSERT INTO `pedidos` (`Productos`,`Nombre`,`info`) VALUES (:pr, :nam, :inf)");
+		$insert->bindParam(':pr',$prod);
+	    $insert->bindParam(':inf',$info);
+	    $insert->bindParam(':nam',$name);
+	    $insert->execute();
+	    $id = $conexion->lastInsertId();
+		var_dump($id);
+		return $id;
+	}
+	function updatepedido($id,$prod,$info){
+		require'conexion.php';
+		$change=$conexion->prepare("UPDATE pedidos SET Productos=:pr, Info=:inf WHERE sucursales.Cod_pedido= :code ");
+	    $change->bindParam(':pr',$prod);
+	    $change->bindParam(':inf',$info);
+	    $change->bindParam(':code',$id);
+	    $change->execute();
+	}
+	function getCosto($cod){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT total FROM pedidos WHERE Cod_pedido = $cod");
+		$consulta->execute();
+        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
+	function getPedidos($cod){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM pedidos WHERE Cod_pedido = $cod");
+		$consulta->execute();
+        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
+	#functions of combos
+	function getCombos(){
+		require'conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM combos");
+		$consulta->execute();
+        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
 	}
 ?>
