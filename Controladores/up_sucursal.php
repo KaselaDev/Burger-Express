@@ -5,11 +5,11 @@
 
 </html>
 <?php
+	include'header.php';
 	require'../Modelos/consultas.php';
 	$direccion = filter_input(INPUT_POST, 'dir');
 	$capacidad = filter_input(INPUT_POST, 'cap');
-	$cantidad = filter_input(INPUT_POST, 'cant');
-	postSucursal($direccion,$capacidad,$cantidad);
+	postSucursal($direccion,$capacidad);
 		
 ?>
 
@@ -20,5 +20,5 @@
   		text: "Nueva sucursal ingresada con exito",
   		footer: "",
 	});
-	window.location.href = "view_sucursales.php"
+	window.location.href = "../Vistas/view_sucursales.php"
 </script>

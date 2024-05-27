@@ -6,7 +6,7 @@
 	require'../Modelos/consultas.php';
 	$cod=filter_input(INPUT_GET, 'codigo');
 	if(isset($cod)){
-		deleteSucursal($cod);
+		deleteEmpleado($cod);
 	}else{
 		header('location:../Vistas/index.php');
 	}
@@ -15,12 +15,12 @@
 		Swal.fire({
 	  		icon: "success",
 	 		title: "Realizado...",
-	  		text: "Sucursal eliminada con exito",
+	  		text: "Empleado eliminado con exito",
 	  		footer: "",
 		}).then((result) => {
     if (result.isConfirmed) {
     	console.log("view")
-		window.location.href = "../Vistas/view_sucursales.php"
+		window.location.href = "../Vistas/view_empleados.php"
 	}});
 	</script>
 

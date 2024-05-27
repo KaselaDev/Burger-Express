@@ -14,27 +14,23 @@ function eliminar(cod){
     	}
     });
 }
-function modificar(a, b, c, d, e, f){
-    const contenido= `<form action='modify.php?cod=${a}&table=sucursales' method="post">
+function modificar(a, b, c, d, e){
+    const contenido= `<form action='modify_sucursales.php?cod=${a}' method="post">
         Direccion:
         <p>
-        <input type="text" name="direccion" placeholder="${b}" class="swal2-input">
+        <input type="text" name="direccion" placeholder="${b}" value="${b}" class="swal2-input">
         <p>
         Capacidad:
         <p>
-         <input type="text" name="capacidad" placeholder="${c}" class="swal2-input">
+         <input type="text" name="capacidad" placeholder="${c}" value="${c}" class="swal2-input">
         <p> 
         Supervisor
         <p>
-         <input type="text" name="supervisor" placeholder="${d}" class="swal2-input" >
+         <input type="text" name="supervisor" placeholder="${d}" value="${d}" class="swal2-input" >
         <p>
         Fecha
         <p>
-        <input type="date" name="fecha" placeholder="${e}" class="swal2-input">
-        <p>
-        Cantidad de empleados
-        <p>
-         <input type="text" name="cant" placeholder="${f}" class="swal2-input">
+        <input type="date" name="fecha" placeholder="${e}" value="${e}" class="swal2-input">
         <p>
         <button type="submit" class="buton-carrito-r">Modificar</button>
         </form>
@@ -60,10 +56,6 @@ function add(){
         Capacidad:
         <p>
          <input type="text" name="cap"  class="swal2-input" required>
-        <p>
-        Cantidad de empleados
-        <p>
-         <input type="text" name="cant" class="swal2-input" required>
         <p>
         <button type="submit" class="buton-carrito-r">Ingresar</button>
         </form>
