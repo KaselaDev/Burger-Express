@@ -110,46 +110,4 @@
 		return $datos;
 	}
 
-	#functions of pedidos
-	function postPedido($name,$prod,$info){
-		require'conexion.php';
-		$insert = $conexion-> prepare("INSERT INTO `pedidos` (`Productos`,`Nombre`,`info`) VALUES (:pr, :nam, :inf)");
-		$insert->bindParam(':pr',$prod);
-	    $insert->bindParam(':inf',$info);
-	    $insert->bindParam(':nam',$name);
-	    $insert->execute();
-	    $id = $conexion->lastInsertId();
-		var_dump($id);
-		return $id;
-	}
-	function updatepedido($id,$prod,$info){
-		require'conexion.php';
-		$change=$conexion->prepare("UPDATE pedidos SET Productos=:pr, Info=:inf WHERE sucursales.Cod_pedido= :code ");
-	    $change->bindParam(':pr',$prod);
-	    $change->bindParam(':inf',$info);
-	    $change->bindParam(':code',$id);
-	    $change->execute();
-	}
-	function getCosto($cod){
-		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT total FROM pedidos WHERE Cod_pedido = $cod");
-		$consulta->execute();
-        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
-	}
-	function getPedidos($cod){
-		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM pedidos WHERE Cod_pedido = $cod");
-		$consulta->execute();
-        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
-	}
-	#functions of combos
-	function getCombos(){
-		require'conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM combos");
-		$consulta->execute();
-        	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
-	}
 ?>
