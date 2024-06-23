@@ -44,7 +44,8 @@
 		}
 			if(cajaCerrada()===false){
 				$ca = $caja[0]['actual'];
-				echo'<tr><td><a><span class="material-symbols-outlined" onclick="add('.$ca.')">add</span></a></td></tr>';
+				$_SESSION['caja']=$ca;
+				echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 			}
 			else{
 				$cierre = getCierre($fecha);

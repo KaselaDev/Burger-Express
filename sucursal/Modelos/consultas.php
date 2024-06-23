@@ -64,12 +64,14 @@ if (session_status() == PHP_SESSION_NONE) {
 		$change=$conexion->prepare("UPDATE caja SET cierre=$cierre WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
 	    $change->execute();
 	}
-function getId($fecha){
+function getId(){
 	require URL;
+	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
+		$fecha = date("Y-m-d");
 	$suc=$_SESSION['Cod_sucursal'];
 	$consulta=$conexion->prepare("SELECT fecha FROM caja WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
-
-		$datos=$consulta->fetchAll(PDO::FETCH_ASSOC);
+	$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 
@@ -96,13 +98,10 @@ function getDescGasto($fecha){
 	return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	
 }
-function postGasto($monto, $desc,$id_caja,$hora,$fecha){
+function postGasto($monto, $desc,$id_caja,$hora){
 		require URL;
 		$suc=$_SESSION['Cod_sucursal'];
 		$consulta= $conexion->prepare("INSERT INTO `gastos` (`id_caja`,`hora`,`descripcion`,`monto`, `Cod_sucursal`) VALUES(:id, :hora, :des, :mon, :cod)");
-
-		require '../Modelos/conexion.php';
-		$consulta= $conexion->prepare("INSERT INTO `gastos` (`id_caja`,`hora`,`descripcion`,`monto`) VALUES(:id, :hora, :des, :mon)");
 
 		$consulta->bindParam(':id',$id_caja);
 		$consulta->bindParam(':hora',$hora);
