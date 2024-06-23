@@ -1,4 +1,3 @@
-<<<<<<< HEAD:Vistas/JavaScript/caja.js
 
 function add(actual=0){
     const contenido= `<form action=../Controladores/up_gasto.php?val=${actual} method="post">
@@ -24,8 +23,7 @@ function add(actual=0){
         footer:"",
     });
     
-=======
-
+}
 function add(){
     const contenido= `<form action='../Controladores/up_gasto.php' method="post">
         
@@ -50,5 +48,4 @@ function add(){
         footer:"",
     });
     
->>>>>>> main:sucursal/Vistas/JavaScript/caja.js
 }

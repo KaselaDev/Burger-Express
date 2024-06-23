@@ -1,4 +1,3 @@
-<<<<<<<< HEAD:Vistas/styles/styles.css
 *{
     margin: 0;
     box-sizing: border-box;
@@ -44,7 +43,7 @@ section{
     border-radius: 5px;
     
 } 
-.menu{
+/*.menu{
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -58,7 +57,7 @@ section{
     width: 230px;
     height:70px;
     padding: 30px;
-}
+}*/
 #box{
     display: flex;
     justify-content: center;
@@ -337,7 +336,6 @@ styles sucursales
     #table .gray{
         background: #D6D6E0;
     }
-========
 *{
     margin: 0;
     box-sizing: border-box;
@@ -634,4 +632,3 @@ button{
     margin-left: 40px;
     background: red;
 }
->>>>>>>> c722990d59e1d6d418bd699fd9474f59acc52470:styles.css

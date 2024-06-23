@@ -73,6 +73,7 @@
 					break;
 			}
 		}		
+		$suc = $_SESSION['Cod_sucursal'];
 		switch ($_SESSION['op']) {
 			case 'Producto mas vendido':
 				$productos = getProductos();
@@ -81,7 +82,7 @@
 				foreach($productos as $producto){
 					$label[]=$producto['Nombre'];
 					$nom=$producto['Nombre'];
-					$sql="SELECT Cod_pedido FROM pedido WHERE producto LIKE '%".$nom."%'".$periodo;
+					$sql="SELECT Cod_pedido FROM pedido WHERE Cod_sucursal=$suc AND producto LIKE '%".$nom."%'".$periodo;
 					$data[$nom]=getPedidosEstadisticas($sql);
 				}
 				break;

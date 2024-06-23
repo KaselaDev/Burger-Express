@@ -17,13 +17,10 @@
 	echo"<table id='table'border='1' style='margin:0;'><thead><th>Id_empleado</th><th>DNI</th><th>Clave</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Dirección</th><th>Fecha ing.</th><th>Fecha nac.</th><th>Puesto</th><th>Sueldo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
 	if(isset($_GET['mod'])){
 		$cod = $_GET['codigo'];
-<<<<<<< HEAD:Vistas/view_empleados.php
 		$datos=getEmpleado($cod);
-=======
 		//echo($cod);
 		$cons = "WHERE `id_empleado` = '$cod'";
 		$datos=getEmpleados($cons);
->>>>>>> main:sucursal/Vistas/view_empleados.php
 		foreach ($datos as $elemento) {
 		$a=$cod;
 			$a.=','.$elemento['DNI'];
