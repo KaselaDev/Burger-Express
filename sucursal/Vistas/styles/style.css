@@ -33,6 +33,7 @@ body::-webkit-scrollbar-thumb {
 /*INDEX*/
 section{
 	padding: 10px;
+<<<<<<< HEAD:Vistas/styles/style.css
      display: flex;
      flex-direction: column;
     justify-content: center;
@@ -50,11 +51,21 @@ h1{
     margin-left: 30px;
     white-space: nowrap;
 padding: 10px;
+=======
+    height: 90%;
+}
+
+#caja{
+    float:right;
+    padding: 10px;
+    background-color: cadetblue;
+>>>>>>> main:sucursal/Vistas/styles/style.css
 }
 
 .menu{
 
     display: flex;
+<<<<<<< HEAD:Vistas/styles/style.css
     justify-content: center;
 }
 .menu .links{
@@ -89,6 +100,8 @@ flex-direction: column;
 .menu{
     margin-top: 40px;
     display: flex;
+=======
+>>>>>>> main:sucursal/Vistas/styles/style.css
     align-items: center;
     gap: 20px;
     flex-direction: column;

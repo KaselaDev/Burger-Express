@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Vistas/user/menu_pedidos.php
 <?php  include 'header_user.php'; ?>
+=======
+<?php include 'header_user.php';  require '../../Modelos/consultas.php'; ?>
+>>>>>>> main:sucursal/Vistas/user/menu_pedidos.php
 <!DOCTYPE html>
 <html lang="en">
 <head>
