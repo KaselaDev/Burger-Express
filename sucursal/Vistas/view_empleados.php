@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="styles/style.css"/>
     <link rel="stylesheet" href="styles/styles.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<script src="JavaScript/view_empleados.js
-"></script>
+	<script src="JavaScript/view_empleados.js"></script>
 </html>
 <?php include'header.php';?>
 <section class="menu">
@@ -18,9 +17,13 @@
 	echo"<table id='table'border='1' style='margin:0;'><thead><th>Id_empleado</th><th>DNI</th><th>Clave</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Dirección</th><th>Fecha ing.</th><th>Fecha nac.</th><th>Puesto</th><th>Sueldo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
 	if(isset($_GET['mod'])){
 		$cod = $_GET['codigo'];
+<<<<<<< HEAD:Vistas/view_empleados.php
+		$datos=getEmpleado($cod);
+=======
 		//echo($cod);
 		$cons = "WHERE `id_empleado` = '$cod'";
 		$datos=getEmpleados($cons);
+>>>>>>> main:sucursal/Vistas/view_empleados.php
 		foreach ($datos as $elemento) {
 		$a=$cod;
 			$a.=','.$elemento['DNI'];
@@ -35,7 +38,7 @@
 		}
 		echo"<script>modificar(".$a.")</script>";		
 	}
-		$datos=getEmpleados();
+		$datos=getEmpleados($_SESSION['Cod_sucursal']);
 		if(empty($datos)){
 			echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 			echo'<script type="text/javascript">

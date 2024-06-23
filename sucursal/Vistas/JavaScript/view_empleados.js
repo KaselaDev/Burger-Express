@@ -52,7 +52,11 @@ function modificar(a, b, c, d, e, f, g, h, i, j){
         <p>
         Sueldo
         <p>
+<<<<<<< HEAD:Vistas/JavaScript/view_empleados.js
+         <input type="double" name="sueldo" placeholder="${i}" value="${i}" min="0" class="swal2-input">
+=======
          <input type="number" name="sueldo" placeholder="${i}" value="${i}" min="0" class="swal2-input">
+>>>>>>> main:sucursal/Vistas/JavaScript/view_empleados.js
         <p> 
         <button type="submit" class="buton-carrito-r">Modificar</button>
         </form>
@@ -106,7 +110,11 @@ function add(){
         <p>
          Sueldo:
         <p>
+<<<<<<< HEAD:Vistas/JavaScript/view_empleados.js
+         <input type="double" name="sueldo" min="0" class="swal2-input" required>
+=======
          <input type="number" name="sueldo" min="0" class="swal2-input" required>
+>>>>>>> main:sucursal/Vistas/JavaScript/view_empleados.js
         <p>
         <button type="submit" class="buton-carrito-r">Ingresar</button>
         </form>

@@ -1,7 +1,5 @@
 <?php 
     include 'header_user.php';
-    include '../../Modelos/consultas.php'; 
-
     $nombre=filter_input(INPUT_GET,'nom');
     $mesa=filter_input(INPUT_GET,'mesa');
     $accion=filter_input(INPUT_GET,'ac');

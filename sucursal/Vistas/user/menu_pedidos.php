@@ -1,11 +1,15 @@
+<<<<<<< HEAD:Vistas/user/menu_pedidos.php
+<?php  include 'header_user.php'; ?>
+=======
 <?php include 'header_user.php';  require '../../Modelos/consultas.php'; ?>
+>>>>>>> main:sucursal/Vistas/user/menu_pedidos.php
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./JavaScript/script.js"></script>
+    <script src="../JavaScript/script.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../JavaScript/script.js"></script>
     <title>Mesas</title>
@@ -43,6 +47,9 @@
                             $estadoMesa="background-color: white;";
                             $accion="nombre(".$key['mesa'].")";
                        }//si la mesa esta libre  
+                       if(cajaCerrada()){
+                        $accion = "block()";
+                       }
                        ?>
                         <div class="mesas" onclick="<?= $accion?>" style="<?= $estadoMesa ?>cursor:pointer;">
                             Mesa <?= $key['mesa'] ?>

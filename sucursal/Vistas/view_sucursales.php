@@ -28,7 +28,7 @@
 		}
 		echo"<script>modificar(".$a.")</script>";		
 	}
-		$datos=getSucursales();
+		$datos=getSucursales("WHERE `Cod_sucursal` = '".$_SESSION['Cod_sucursal']."'");
 		if(empty($datos)){ #SI NO HAY SUCURSALES CARGADAS
 			echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 			echo'<script type="text/javascript">

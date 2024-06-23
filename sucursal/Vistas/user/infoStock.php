@@ -1,7 +1,13 @@
 <?php
     require '../../Modelos/conexion.php';
+<<<<<<< HEAD:Vistas/user/infoStock.php
+        session_start();
+        $sucursal=$_SESSION['Cod_sucursal'];
+    $consulta=$conexion->prepare("SELECT * FROM `stock` WHERE Cod_sucursal=$sucursal");
+=======
 
     $consulta=$conexion->prepare("SELECT * FROM `stock`");
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
     $consulta->execute();
     $datos=$consulta->fetchALL(PDO::FETCH_ASSOC);
 ?>
@@ -15,6 +21,10 @@
     <link rel="stylesheet" href="../styles/style.css">
     <title>Stock</title>
     <style>
+<<<<<<< HEAD:Vistas/user/infoStock.php
+       
+=======
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
         .stockLista{
             background-color: rgb(255, 224, 255);
             padding: 5px;
@@ -31,15 +41,31 @@
             text-align: center;
         }
         canvas{
+<<<<<<< HEAD:Vistas/user/infoStock.php
+            width: 400px;
+=======
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
             height: 400px;
             position: relative;
             left: -50%;
             transform: translate(25%);
         }
+<<<<<<< HEAD:Vistas/user/infoStock.php
+        .grafico{
+            width: 2000px;
+            padding-left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <?php include 'header_user.php'; 
+?>
+=======
     </style>
 </head>
 <body>
     <?php include 'header_user.php'; ?>
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
     <h1>Informacion de stock</h1>
     <hr>
     <div class="grafico">
@@ -47,6 +73,14 @@
         <?php
             $dataStock=[];
             $nombreStock=[];
+<<<<<<< HEAD:Vistas/user/infoStock.php
+            foreach($datos as $db){
+                $dataStock[] = $db['Cantidad'];
+                $nombreStock[] = $db['Nombre'];
+            }
+            $dataStock=json_encode($dataStock);
+            $nombreStock=json_encode($nombreStock);
+=======
             $stockColor=[];
             foreach($datos as $db){
                 $dataStock[] = $db['Cantidad'];
@@ -56,10 +90,23 @@
             $dataStock=json_encode($dataStock);
             $nombreStock=json_encode($nombreStock);
             $stockColor=json_encode($stockColor);
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
         ?>
         <script>
             let dataStock = <?php echo $dataStock; ?>;
             let nombreStock = <?php echo $nombreStock; ?>;
+<<<<<<< HEAD:Vistas/user/infoStock.php
+            let datos
+            const ctx = document.getElementById('GraficoStock');
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: nombreStock,
+                datasets: [{
+                  label: 'stock general',
+                  data: dataStock,
+                  backgroundColor: 'red',
+=======
             let stockColor = <?php echo $stockColor; ?>;
             let datos
             const ctx = document.getElementById('GraficoStock');
@@ -71,6 +118,7 @@
                   label: 'Cantidad',
                   data: dataStock,
                   backgroundColor: stockColor,
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
                   borderWidth: 0
                 }]
               },
@@ -94,6 +142,10 @@
             echo '<div class="stock">
                 <h3>'.$db['Nombre'].' | '.$db['Cantidad'].'</h3>
             </div>';
+<<<<<<< HEAD:Vistas/user/infoStock.php
+
+=======
+>>>>>>> main:sucursal/Vistas/user/infoStock.php
         }
     ?>
     </div>

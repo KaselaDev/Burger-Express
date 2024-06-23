@@ -1,7 +1,5 @@
 <?php 
 	include 'header_user.php'; 
-	require '../../Modelos/consultas.php'; 
-
 	$mesa=filter_input(INPUT_GET, 'mesa');
 	$tablaProductos=view_tabla2("productos");
 	$tablaPedido=view_tabla2("pedido");
