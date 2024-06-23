@@ -3,7 +3,8 @@
     box-sizing: border-box;
 }
 :root{
-    --header-color:black;
+    --header-color:#970D0D;
+    --bg-color:#eae2b7;
     --table-th-color:#003049;
     --header-font-color:white;
     --font-color:black;
@@ -16,6 +17,7 @@
 }
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
 }
 
 body::-webkit-scrollbar {
@@ -41,6 +43,8 @@ h1{
     padding-left: 30px;
 }
 #caja{
+    text-decoration: none;
+    color: var(--header-font-color);
     float:right;
     padding: 10px;
     background-color: var(--header-color);
@@ -54,14 +58,6 @@ h1{
 padding: 10px;
     height: 90%;
 }
-
-#caja{
-    float:right;
-    padding: 10px;
-    background-color: cadetblue;
-
-}
-
 .menu{
 
     display: flex;

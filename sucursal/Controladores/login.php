@@ -14,7 +14,6 @@
             $_SESSION['usuario'] = $elemento['Nombre'];
             $_SESSION['DNI'] = $elemento['DNI'];
             $_SESSION['sucursal'] = $elemento['Direccion'];
-            var_dump($elemento['Direccion']);
             $_SESSION['Cod_sucursal']=$elemento['Cod_sucursal'];
         }
 

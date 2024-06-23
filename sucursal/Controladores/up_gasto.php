@@ -5,19 +5,18 @@
 </head>
 </html>
 <?php
+	session_start();
 	require '../Modelos/consultas.php';
 	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
-	$fecha = date("Y-m-d");
 	$monto = filter_input(INPUT_POST, 'monto');
 	$desc = filter_input(INPUT_POST, 'des');
 	
 	$hora= date("H:i:s");
-	$datos = getId($fecha);
+	$datos = getId();
 	foreach($datos as $elementos){
 		$id_caja=$elementos['fecha'];
 	}
-	$a=intval($_GET['val']);
-	if($a<intval($monto)){
+	if($_SESSION['caja']<$monto){
 	echo"<script type='text/javascript'>
 
 			console.log('hola');
@@ -30,7 +29,7 @@
     			if (result.isConfirmed) {
     			window.location.href = `../Vistas/caja.php`}});</script>";
     }else{
-		postGasto($monto,$desc,$id_caja,$hora,$fecha);	
+		postGasto($monto,$desc,$id_caja,$hora);	
 ?>
 <script type="text/javascript">
 	Swal.fire({
