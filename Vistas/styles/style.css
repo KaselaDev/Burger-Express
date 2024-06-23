@@ -2,7 +2,18 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+:root{
+    --header-color:black;
+    --table-th-color:#003049;
+    --header-font-color:white;
+    --font-color:black;
+    --aside-color:black;
+    --button-color:#003049;
+    --aside-button-color:#f77f00;
+    --button-hover-color:#e85d04;
+    --button-font-color:black;
+    --graphic-color:#3d0066;
+}
 body {
     font-family: Arial, sans-serif;
 }
@@ -32,10 +43,10 @@ h1{
 #caja{
     float:right;
     padding: 10px;
-    background-color: #06d6a0;
+    background-color: var(--header-color);
 }
 #sucursal{
-    color:antiquewhite;
+    color:var(--header-font-color);
     margin-left: 30px;
     white-space: nowrap;
 padding: 10px;
@@ -57,27 +68,26 @@ flex-direction: column;
     margin-top: 20px;
 }
 .links li input[ type="submit"], .menu .links a{
-    background-color: #06d6a0; 
-    color: white;
+    background-color:var(--button-color); 
+    color: var(--header-font-color);
     padding: 10px;
     font-size: large;
     font-weight: bold;
     border:none;
     border-radius: 5px;
-    width: 230px;
+    width: 250px;
     height: 70px;
     cursor: pointer;
     text-align: center;
     }
 .links li input[type="submit"]:hover {
-    background-color: #06d6a0; 
+
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-    width: 230px;
-    height: 70px;
-    border-radius: 5px;
+    opacity: 0.5;
     
 } 
 .menu{
+    margin-top: 40px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -89,20 +99,19 @@ flex-direction: column;
     width: 300px;
     overflow: hidden;
     margin: 0;
-    background-color: #06d6a0;
+    background-color:var(--button-color);
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.2s;
     padding: 10px;
     gap: 10px;
+     text-decoration: none;
+    color: var(--header-font-color);
+
 }
 .inicio:hover{
     opacity: 0.5;
-}
-.inicio{
-    text-decoration: none;
-    color: white;
 }
 
 .inicio span{
@@ -123,13 +132,13 @@ styles de tablas
 }
 #table th{
     padding: 4px;
-    background: cadetblue;
+    background: var(--table-th-color);
 }
 #table td{
     padding: 4px;
 }
 #table tr:hover{
-    background: gray;
+    background: var(--table-hover-color);
 }
 #table .gray{
     background: #D6D6E0;
@@ -350,8 +359,10 @@ button{
 #menu {
     display: flex;
     align-items: center;
-    background-color: cadetblue;
+    background-color: var(--header-color);
     padding: 0;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 #menu h2{
@@ -379,7 +390,7 @@ button{
     line-height: NaNpx;
     padding: 15px 14px;
     text-decoration: none;
-    color: #FFFFFF;
+    color:var(--header-font-color);
     font-size: <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16</font></font>px;
 }
 #menu a.dropdown-arrow:after {
@@ -387,8 +398,9 @@ button{
     margin-left: 5px;
 }
 #menu li a:hover {
-    color: cadetblue;
-    background: #F2F2F2;
+    color: var(--header-color);
+    background: var(--header-font-color);
+    opacity: 0.5;
 }
 #menu input {
     display: none;
@@ -464,20 +476,24 @@ button{
 }
 /*estadisticas*/
 #content{
+    padding: 0px;
     display: flex;
     flex-direction: row;
-    min-height: 800px;
+    gap: 50px;
+    padding-top: 50px;
+    padding-right: 50px;
+    height: 100vh;
 }
 aside{
     float: left;
-    width: 15%;
+    width: 20%;
     height: 100%;
 
 }
 #buttons{
-    margin-top: 50px;
+    color: var(--header-font-color);
     height: 100%;
-    background-color: #06d6a0;
+    background-color: var(--aside-color);
     padding-top: 120px;
     display: flex;
     flex-direction: column;
@@ -485,17 +501,25 @@ aside{
     text-align: center;
     gap: 30px;
     border-radius: 5px;
+
+}
+#buttons h2{
+    margin: 10px;
 }
 #buttons input{
+    color:  var(--font-color);
     font-size: large;
     font-weight: bold;
     padding: 10px;
+    margin-bottom: 30px;
     border-radius: 5px;
-    background-color: #073b4c;
-    color: white;
+    background-color: var(--aside-button-color);
 }
 #grafico{
-    width: 85%;
+   padding-top:100px ;
+    width: 80%;
+    height: 600px;
 }
 #Estadistica{
+    width: 50%;
 }

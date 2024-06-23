@@ -29,15 +29,15 @@ section{
 .links li input[ type="submit"] {
     position: relative;
     padding: 10px 20px;
-    background-color: cadetblue; 
-    color: white;
+    background-color: var(--button-color); 
+    color: var(--header-font-color);
     border-radius: 5px;
     width: 230px;
     height: 70px;
     cursor: pointer;
     }
 .links li input[type="submit"]:hover {
-    background-color: cadetblue; 
+    background-color: var(--button-hover-color); 
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     width: 230px;
     height: 70px;
@@ -53,6 +53,7 @@ section{
     list-style: none;
 }
 .menu .links input[type="submit"]{
+
     margin-bottom: 15px;
     width: 230px;
     height:70px;
@@ -322,7 +323,8 @@ styles sucursales
     }
     #table th{
         padding: 4px;
-        background: cadetblue;
+        color:var(--header-font-color);
+        background: var(--table-th-color);
 
     }
     #table td{
@@ -394,6 +396,7 @@ section{
     width: 230px;
     height:70px;
     padding: 30px;
+    color:var(--header-font-color);
 }
 #box{
     display: flex;

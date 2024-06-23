@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./JavaScript/script.js"></script>
+    <script src="../JavaScript/script.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../JavaScript/script.js"></script>
     <title>Mesas</title>

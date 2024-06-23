@@ -1,6 +1,7 @@
 
-function graficar(datos=[],newLabel=[]){
-	console.log(datos);
+function graficar(datos,newLabel=[]){
+		console.log(datos);
+
 	 const ctx = document.getElementById('Estadistica');
 
             new Chart(ctx, {
@@ -10,8 +11,8 @@ function graficar(datos=[],newLabel=[]){
                 datasets: [{
                   label: 'Cantidad de ventas',
                   data: datos,
-                  backgroundColor: 'red',
-                  borderWidth: 1
+                  backgroundColor: '#d62828',
+                  borderWidth: 0,
                 }]
               },
               options: {

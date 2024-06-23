@@ -325,7 +325,8 @@ function postOpen($importe,$encargado){
 		require URL;
 		$consulta=$conexion->prepare($sql);
 		$consulta->execute();
-		return $consulta->fetchAll(PDO::FETCH_ASSOC);
+		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return count($datos);
 	}
 	function search_pedido($nombre,$mesa,$id){
 		require URL;
@@ -346,7 +347,8 @@ function postOpen($importe,$encargado){
         $nump_id++;
         //echo $nump_id;
         $fecha=date("Y-m-d");
-        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est);");
+        $hora=date("H:i:s");
+        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`,`hora`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est, :hour);");
         $consulta->bindParam(':mesa',$mesa);
 		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
 		$consulta->bindParam(':fec',$fecha);
@@ -355,6 +357,7 @@ function postOpen($importe,$encargado){
 	    $consulta->bindParam(':id',$id);
 	    $consulta->bindParam(':est',$estado);
 	    $consulta->bindParam(':cod',$nump_id);
+	   	$consulta->bindParam(':hour',$hora);
 	    return $consulta->execute();
 	}
 
