@@ -1,0 +1,501 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #CACACA;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #333;    /* color of the scroll thumb */
+}
+
+/*INDEX*/
+section{
+	padding: 10px;
+     display: flex;
+     flex-direction: column;
+    justify-content: center;
+}
+h1{
+    padding-left: 30px;
+}
+#caja{
+    float:right;
+    padding: 10px;
+    background-color: #06d6a0;
+}
+#sucursal{
+    color:antiquewhite;
+    margin-left: 30px;
+    white-space: nowrap;
+padding: 10px;
+}
+
+.menu{
+
+    display: flex;
+    justify-content: center;
+}
+.menu .links{
+    list-style: none;
+
+}
+.links li {
+    display: flex;
+flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+.links li input[ type="submit"], .menu .links a{
+    background-color: #06d6a0; 
+    color: white;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+    border:none;
+    border-radius: 5px;
+    width: 230px;
+    height: 70px;
+    cursor: pointer;
+    text-align: center;
+    }
+.links li input[type="submit"]:hover {
+    background-color: #06d6a0; 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    width: 230px;
+    height: 70px;
+    border-radius: 5px;
+    
+} 
+.menu{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+}
+
+/*MENU*/
+.inicio{
+    width: 300px;
+    overflow: hidden;
+    margin: 0;
+    background-color: #06d6a0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    padding: 10px;
+    gap: 10px;
+}
+.inicio:hover{
+    opacity: 0.5;
+}
+.inicio{
+    text-decoration: none;
+    color: white;
+}
+
+.inicio span{
+    font-size: 2.5rem;
+}
+        
+/*
+styles de tablas
+*/
+ a{
+    text-decoration: none;
+    color: black;
+}
+
+#table{
+    border-collapse: collapse;
+    text-align: center;
+}
+#table th{
+    padding: 4px;
+    background: cadetblue;
+}
+#table td{
+    padding: 4px;
+}
+#table tr:hover{
+    background: gray;
+}
+#table .gray{
+    background: #D6D6E0;
+}
+
+td a{
+    border-radius: 5px;
+}
+
+/*INGRESO*/
+.form {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #CACACA;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-left: 25%;
+    margin-right: 25%;
+    line-height: 45px;
+}
+.form label {
+	display: inline-block;
+	width: 100px;
+	margin-right: 10px;
+	text-align: right;
+}
+.form input[type="text"] {
+    width: 200px;
+    padding: 5px;
+}
+.form input[type="number"] {
+    width: 200px;
+    padding: 5px;
+}
+        
+.boton-submit{
+    padding: 10px;
+    margin: 10px 0;
+    width: 100px;
+    font-weight: 600;
+    color: white;
+    border:none;
+    background-color: cadetblue;
+    cursor: pointer;
+}
+.boton-submit:hover{
+    opacity: 0.5;
+}
+
+/*********************************
+*
+*           PEDIDOS
+*
+***************************/
+
+.local-mesas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 700px;
+}
+
+.mesas{
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    width: 130px;
+    padding: 2rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+.mesas:hover{
+    opacity: 0.4;
+}
+
+.carrito {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    max-height: 180px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.carrito h2{
+    display: flex;
+}
+
+#lista-carrito {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#lista-carrito li {
+    padding: 5px;
+    border: 1px solid #CACACA;
+    border-radius: 10px;
+    min-width: max-content;
+    text-align: center;
+}
+
+.pedido{
+    width: 100%;
+}
+
+.pedido-menu{
+    display:flex; 
+    padding:1rem; 
+    gap:5px; 
+}
+
+.pedido-caja{
+    width:50%;
+    padding:1rem;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.pedido-caja h3{
+    display: flex;
+    align-items: center;
+}
+#buton-ico{
+    display: none;
+}
+button{
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buton-agregar{/*BOTON VER PEDIDO*/
+    background-color: #4CAF50;
+}
+
+.buton-agregar:hover {
+    transition: all .4s;
+    background-color: #3A863D;
+}
+
+.buton-carrito-r{/*BOTON REALIZAR*/
+    background-color: #4CAF50;
+    padding: 10px 20px;
+}
+
+.buton-carrito-r:hover {
+    transition: all .4s;
+    background-color: #3A863D;
+}
+
+.buton-carrito-c{/*BOTON CANCELAR*/
+    background-color: #f44336;
+    padding: 10px 20px;
+}
+
+.buton-carrito-c:hover {
+    transition: all .4s;
+    background-color: #D54035;
+}
+
+/*********************************
+*
+*      ESTILO COLA DE PEDIDOS
+*
+**********************************/
+
+.estado-pedidos{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap:10px;
+    height: 100%;
+}
+
+.estado-pedidos-div{
+    width:50%;
+    padding:1rem;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.estado-pedidos-div h3{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#pedido-no-preparado,#pedido-preparado{
+    height: 100%;
+}
+
+#pedido-no-preparado div{
+    border-left: 5px solid ;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+#pedido-preparado div{
+    border-left: 5px solid ;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+
+/*****************************
+*
+*           HEADER
+*
+*****************************/
+#menu {
+    display: flex;
+    align-items: center;
+    background-color: cadetblue;
+    padding: 0;
+}
+
+#menu h2{
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    margin-left: 20px;
+    gap:10px;
+}
+#menu ul, #menu li {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none
+}
+#menu ul {
+    width: 100%;
+    text-align: right;
+}
+#menu li {
+    display: inline-block;
+    position: relative;
+}
+#menu a {
+    display: block;
+    line-height: NaNpx;
+    padding: 15px 14px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16</font></font>px;
+}
+#menu a.dropdown-arrow:after {
+    content: "\002B";
+    margin-left: 5px;
+}
+#menu li a:hover {
+    color: cadetblue;
+    background: #F2F2F2;
+}
+#menu input {
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">50</font></font>px;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer
+}
+#menu label {
+    display: none;
+    line-height: NaNpx;
+    text-align: center;
+    position: absolute;
+    left: 35px
+}
+#menu label:before {
+    font-size: 1.6em;
+    color: #FFFFFF;
+    content: "\2261"; 
+    margin-left: 20px;
+}
+#menu ul.sub-menus{
+    height: auto;
+    overflow: hidden;
+    width: 150px;
+    background: #444444;
+    position: absolute;
+    z-index: 99;
+    display: none;
+}
+#menu ul.sub-menus li {
+    display: block;
+    text-align: left;
+    width: 100%;
+}
+#menu ul.sub-menus a {
+    color: #FFFFFF;
+    font-size: <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16</font></font>px;
+}
+#menu li:hover ul.sub-menus {
+    display: block
+}
+#menu ul.sub-menus a:hover{
+    background: #F2F2F2;
+    color: #444444;
+}
+@media screen and (max-width: 800px){
+    #menu {position:relative}
+    #menu ul {background:#444444;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none;text-align:left;}
+    #menu ul.sub-menus {width:100%;position:static;}
+    #menu ul.sub-menus a {padding-left:30px;}
+    #menu li {display:block;float:none;width:auto;}
+    #menu input, #menu label {position:absolute;top:0;left:0;display:block}
+    #menu input {z-index:4}
+    #menu input:checked + label {color:#FFFFFF}
+    #menu input:checked + label:before {content:"\00d7"}
+    #menu input:checked ~ ul {display:block}
+    
+    .buton-text{display: none;}
+    #buton-ico{display: block;}
+    .buton-carrito-c, .buton-carrito-r{
+        padding: 5px;
+    }
+    .pedido-menu{
+        flex-wrap: wrap;
+    }
+    .pedido-caja{
+        width: 100%;
+    }
+
+}
+/*estadisticas*/
+#content{
+    display: flex;
+    flex-direction: row;
+    min-height: 800px;
+}
+aside{
+    float: left;
+    width: 15%;
+    height: 100%;
+
+}
+#buttons{
+    margin-top: 50px;
+    height: 100%;
+    background-color: #06d6a0;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    gap: 30px;
+    border-radius: 5px;
+}
+#buttons input{
+    font-size: large;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #073b4c;
+    color: white;
+}
+#grafico{
+    width: 85%;
+}
+#Estadistica{
+}
