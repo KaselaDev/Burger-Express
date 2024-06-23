@@ -33,7 +33,6 @@ body::-webkit-scrollbar-thumb {
 /*INDEX*/
 section{
 	padding: 10px;
-<<<<<<< HEAD:Vistas/styles/style.css
      display: flex;
      flex-direction: column;
     justify-content: center;
@@ -47,11 +46,12 @@ h1{
     background-color: var(--header-color);
 }
 #sucursal{
+    display: flex;
+    align-items: center;
     color:var(--header-font-color);
     margin-left: 30px;
     white-space: nowrap;
 padding: 10px;
-=======
     height: 90%;
 }
 
@@ -59,18 +59,22 @@ padding: 10px;
     float:right;
     padding: 10px;
     background-color: cadetblue;
->>>>>>> main:sucursal/Vistas/styles/style.css
+
 }
 
 .menu{
 
     display: flex;
-<<<<<<< HEAD:Vistas/styles/style.css
     justify-content: center;
+}
+.menu ul{
+
 }
 .menu .links{
     list-style: none;
-
+display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .links li {
     display: flex;
@@ -100,8 +104,7 @@ flex-direction: column;
 .menu{
     margin-top: 40px;
     display: flex;
-=======
->>>>>>> main:sucursal/Vistas/styles/style.css
+
     align-items: center;
     gap: 20px;
     flex-direction: column;
@@ -145,6 +148,7 @@ styles de tablas
 }
 #table th{
     padding: 4px;
+    color: var(--header-font-color);
     background: var(--table-th-color);
 }
 #table td{
@@ -370,6 +374,8 @@ button{
 *
 *****************************/
 #menu {
+    color: var(--header-font-color);
+    height: 80px;
     display: flex;
     align-items: center;
     background-color: var(--header-color);
@@ -403,6 +409,7 @@ button{
     line-height: NaNpx;
     padding: 15px 14px;
     text-decoration: none;
+    border-radius: 5px;
     color:var(--header-font-color);
     font-size: <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16</font></font>px;
 }
