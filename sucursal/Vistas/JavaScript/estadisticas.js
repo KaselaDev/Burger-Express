@@ -1,8 +1,8 @@
 
 function graficar(datos,newLabel=[]){
-		console.log(datos);
+    console.log(datos);
 
-	 const ctx = document.getElementById('Estadistica');
+   const ctx = document.getElementById('Estadistica');
 
             new Chart(ctx, {
               type: 'bar',

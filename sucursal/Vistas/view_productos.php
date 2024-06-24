@@ -11,12 +11,12 @@
 	<script src="./JavaScript/script.js"></script>
 </head>
 <body>
-	<section class="menu">
+	<section>
+		<h2>Productos</h2>
+		<hr>
 		<?php 
-			require '../Modelos/consultas.php';
-
 			$datos=view_tabla("productos");
-			echo"<table id='table'border='1'><thead><th>Id Productos</th><th>Nombre</th><th>Descripción</th><th>Precio</th> <th>Editar</th> <th>Eliminar</th></thead>";
+			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>Id Productos</th><th>Nombre</th><th>Descripción</th><th>Precio</th> <th>Editar</th> <th>Eliminar</th></thead>";
 			
 			foreach($datos as $key){
 				if ($key['Id_producto']%2 != 0) {
@@ -31,7 +31,16 @@
 			}
 			echo '<tr><td><a onclick="addProducto()" style="cursor:pointer"><span class="material-symbols-outlined" style="background:green;">add</span></a></td></tr>';
 			echo "</table>";
+			$tablaProductos=json_encode($datos);
+			$fechaD=date('Y-m-d');
 		 ?>	
+		 <h2 style="border-bottom: 1px solid;">Descuentos</h2>
+		 <div class="lista-descuentos">
+		 	<button class="boton-descuento" onclick='addDescuento2(<?= $tablaProductos ?>,"<?= $fechaD ?>")'>
+		 		<span class="material-symbols-outlined" id="boton-descuento">new_label</span>
+		 	</button>
+		 	
+		 </div>
 	</section>
 </body>
 </html>

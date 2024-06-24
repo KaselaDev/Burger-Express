@@ -16,7 +16,8 @@
 	$Puesto = filter_input(INPUT_POST, 'puesto');
 	$Sueldo = filter_input(INPUT_POST, 'sueldo');
     $Clave=filter_input(INPUT_POST, 'clave');
-	postEmpleado($DNI,$Clave,$Nombre,$Apellido,$Telefono,$Direccion,$Fnac,$Puesto,$Sueldo);
+    $Sucursal=filter_input(INPUT_POST, 'sucursal');
+	postEmpleado($DNI,$Clave,$Nombre,$Apellido,$Telefono,$Direccion,$Fnac,$Puesto,$Sueldo,$Sucursal);
 		
 ?>
 

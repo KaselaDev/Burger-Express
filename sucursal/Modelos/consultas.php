@@ -4,26 +4,19 @@
 *	AGREGADO CAJA
 *
 ********************************************* */
-    define("URL", "C:/xampp/htdocs/sucursalV6/sucursal/Modelos/conexion.php");
-if (session_status() == PHP_SESSION_NONE) {
-    session_start(); 
-}
-
-/*function cerrarCaja(){
+function cerrarCaja(){
 		require '../Modelos/conexion.php';
 		date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 		$fecha = date("Y-m-d");
 		$cie=0;
 		$change=$conexion->prepare("UPDATE caja SET cierre=$cie WHERE fecha LIKE '%".$fecha."%'");
 	    $change->execute();
-	}*/
+	}
 	function cajaCerrada(){
 		require 'conexion.php';
-
 		date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 		$fecha = date("Y-m-d");
-		$suc=$_SESSION['Cod_sucursal'];
-		$consulta=$conexion->prepare("SELECT cierre FROM caja WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
+		$consulta=$conexion->prepare("SELECT cierre FROM caja WHERE fecha LIKE '%".$fecha."%'");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		foreach($datos as $caja){
@@ -43,81 +36,44 @@ if (session_status() == PHP_SESSION_NONE) {
 		$consulta->execute();
 		return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	}
-	function getCierre($fecha){
-		require URL;
-				$suc=$_SESSION['Cod_sucursal'];
-
-		$consulta=$conexion->prepare("SELECT cierre FROM caja WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
-		$consulta->execute();
-		return $consulta->fetchAll(PDO::FETCH_ASSOC);
-	}
-	function cerrarCaja(){
-		require URL;
-		date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
-		$fecha = date("Y-m-d");
-		$datos = getCaja($fecha);
-		foreach($datos as $caja){
-			$cierre = $caja['actual'];
-		}
-		$suc=$_SESSION['Cod_sucursal'];
-		$change=$conexion->prepare("UPDATE caja SET cierre=$cierre WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
-	    $change->execute();
-	}
-function getId(){
-	require URL;
-	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
-		$fecha = date("Y-m-d");
-	$suc=$_SESSION['Cod_sucursal'];
-	$consulta=$conexion->prepare("SELECT fecha FROM caja WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
+function getCaja($fecha){
+	require '../Modelos/conexion.php';
+	$consulta=$conexion->prepare("SELECT actual FROM caja WHERE fecha LIKE '%".$fecha."%'");
 	$consulta->execute();
-		return $consulta->fetchAll(PDO::FETCH_ASSOC);
-	}
-
-
+	return $consulta->fetchAll(PDO::FETCH_ASSOC);
+}
+function getId($fecha){
+	require '../Modelos/conexion.php';
+	$consulta=$conexion->prepare("SELECT fecha FROM caja WHERE fecha LIKE '%".$fecha."%'");
+	$consulta->execute();
+	return $consulta->fetchAll(PDO::FETCH_ASSOC);
+}
 function getGastos($fecha){
-	require URL;
-	$suc=$_SESSION['Cod_sucursal'];
-	$consulta=$conexion->prepare("SELECT * FROM gastos WHERE Cod_sucursal=$suc AND id_caja LIKE '%".$fecha."%'");
-
 	require '../Modelos/conexion.php';
 	$consulta=$conexion->prepare("SELECT * FROM gastos WHERE id_caja LIKE '%".$fecha."%'");
-
 	$consulta->execute();
 	return $consulta->fetchAll(PDO::FETCH_ASSOC);
 }
 function getDescGasto($fecha){
-	require URL;
-	$suc=$_SESSION['Cod_sucursal'];
-	$consulta=$conexion->prepare("SELECT * FROM gastos WHERE Cod_sucursal=$suc AND id_caja LIKE '%".$fecha."%'");
-
 	require '../Modelos/conexion.php';
 	$consulta=$conexion->prepare("SELECT * FROM gastos WHERE id_caja LIKE '%".$fecha."%'");
-
 	$consulta->execute();
 	return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	
 }
-function postGasto($monto, $desc,$id_caja,$hora){
-		require URL;
-		$suc=$_SESSION['Cod_sucursal'];
-		$consulta= $conexion->prepare("INSERT INTO `gastos` (`id_caja`,`hora`,`descripcion`,`monto`, `Cod_sucursal`) VALUES(:id, :hora, :des, :mon, :cod)");
-
+function postGasto($monto, $desc,$id_caja,$hora,$fecha){
+		require '../Modelos/conexion.php';
+		$consulta= $conexion->prepare("INSERT INTO `gastos` (`id_caja`,`hora`,`descripcion`,`monto`) VALUES(:id, :hora, :des, :mon)");
 		$consulta->bindParam(':id',$id_caja);
 		$consulta->bindParam(':hora',$hora);
 		$consulta->bindParam(':des', $desc);
 		$consulta->bindParam(':mon',$monto);
-		$consulta->bindParam(':cod',$suc);
-
-
 		$consulta->execute();
 		updateCaja($monto,"-");
 	}
 	function updateCaja($monto,$ope){
 
-		require URL;
-
 		require '../Modelos/conexion.php';
-
 		date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 		$fecha = date("Y-m-d");
 		$caja = getCaja($fecha);
@@ -135,22 +91,15 @@ function postGasto($monto, $desc,$id_caja,$hora){
 				break;
 		}
 		
-		$suc=$_SESSION['Cod_sucursal'];
-		$change=$conexion->prepare("UPDATE caja SET actual=:act WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
-
 		var_dump($actual);
 		//var_dump($fecha);
 		$change=$conexion->prepare("UPDATE caja SET actual=:act WHERE fecha LIKE '%".$fecha."%'");
-
 	    $change->bindParam(':act',$actual);
 	    $change->execute();
 
 	}
 function updateGasto($id){
-	require URL;
-
 	require'../Modelos/conexion.php';
-
 	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 	$fecha = date("Y-m-d");
 	$datos = getDescGasto($fecha);
@@ -166,12 +115,14 @@ function updateGasto($id){
 }
 
 function postOpen($importe,$encargado){
+
 	require URL;
 	$consulta=$conexion->prepare("INSERT INTO `caja` (`apertura`,`actual`,`encargado`,`Cod_sucursal`) VALUES(:ap, :ac, :enc, :suc)");
 	$consulta->bindParam(':ap',$importe);
 	$consulta->bindParam(':ac',$importe);
 	$consulta->bindParam(':enc',$encargado);
 	$consulta->bindParam(':suc',$_SESSION['Cod_sucursal']);
+
 
 }
 
@@ -182,19 +133,13 @@ function postOpen($importe,$encargado){
 ********************************************* */
 
 	function deleteSucursal($cod){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare("DELETE FROM sucursales WHERE Cod_sucursal=:cod");
 		$consulta->bindParam(":cod",$cod);
 		$consulta->execute();
 	}
 	function getSucursales($one=" "){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT * FROM sucursales $one");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -202,10 +147,7 @@ function postOpen($importe,$encargado){
 	}
 
 	function updateSucursal($dire,$capa,$co,$fecha,$cod){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$change=$conexion->prepare("UPDATE sucursales SET Direccion=:dir, Capacidad=:cap, Cod_supervisor=:cod_s, Fecha=:fec WHERE sucursales.Cod_sucursal= :code ");
 	    $change->bindParam(':dir',$dire);
 	    $change->bindParam(':cap',$capa);
@@ -216,53 +158,51 @@ function postOpen($importe,$encargado){
 	}
 
 	function postSucursal($dir,$cap){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
         date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 		$fecha = date("Y-m-d");
 		$insert = $conexion->prepare("INSERT INTO `sucursales` (`Direccion`,`Capacidad`,`Cod_supervisor`,`Fecha`) VALUES (:dir, :cap, '1', :fec)");
 		$insert->bindParam(':dir',$dir);
 		$insert->bindParam(':cap',$cap);
 		$insert->bindParam(':fec',$fecha);
-		$insert->execute();
+		if ($insert->execute()) {//SI se agrego la sucursal agrege las mesas
+			$tablaSucursales=getSucursales();
+			foreach ($tablaSucursales as $key) {
+				$cod=$key['Cod_sucursal'];
+			}
+			insert_mesa($cap,$cod);
+		}//SI se agrego la sucursal agrege las mesas
 	}
-#functions of empleado
-	function deleteEmpleado($cod){
-		require URL;
 
-		require'../Modelos/conexion.php';
-
-		$consulta=$conexion->prepare("DELETE FROM empleados WHERE id_empleado=:id");
-	    $consulta->bindParam(":id",$cod);
-	    $consulta->execute();
-	}
-	function getEmpleados($sucursal){
-		require URL;
-		$consulta = $conexion->prepare("SELECT * FROM empleados WHERE Cod_sucursal=$sucursal");
+	function getSucursalByDireccion($dir){
+		require '../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM sucursales WHERE Direccion LIKE '%".$dir."%'");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
-	function getEmpleado($cod){
-		require URL;
-		$consulta = $conexion->prepare("SELECT * FROM empleados WHERE id_empleado=$cod");
-	}
-	// function getEmpleados($one=" "){
-	// 	require'../Modelos/conexion.php';
-	// 	$consulta = $conexion->prepare("SELECT * FROM empleados $one");
 
-	// 	$consulta->execute();
-	// 	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-	// 	return $datos;
-	// }
+/*********************************************
+*
+*	CRUD EMPLEADOS
+*
+********************************************* */
+	function deleteEmpleado($cod){
+		require'../Modelos/conexion.php';
+		$consulta=$conexion->prepare("DELETE FROM empleados WHERE id_empleado=:id");
+	    $consulta->bindParam(":id",$cod);
+	    $consulta->execute();
+	}
+	function getEmpleados($one=" "){
+		require'../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM empleados $one");
+		$consulta->execute();
+		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		return $datos;
+	}
 
 	function updateEmpleado($id,$dni,$clave,$name,$ape,$tel,$dir,$fn,$puesto,$sueldo){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$change=$conexion->prepare("UPDATE empleados SET Nombre=:name, Apellido=:ape, Telefono=:tel, Direccion=:dir, Fnac=:fn, Puesto=:puesto, Sueldo=:sueldo, DNI=:dni, Clave=:cla WHERE empleados.id_empleado= :id ");
 	    $change->bindParam(':id',$id);
 	    $change->bindParam(':dni',$dni);
@@ -276,20 +216,15 @@ function postOpen($importe,$encargado){
 	    $change->bindParam(':sueldo',$sueldo);
 	    $change->execute();
 	}
-	#functions of empleado
-	function postEmpleado($dni,$clave,$name,$ape,$tel,$dir,$fn,$puesto,$sueldo){
-		require URL;
-        date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
-		$fecha = date("Y-m-d");
-		$insert = $conexion->prepare("INSERT INTO `empleados` (`DNI`,`Clave`,`Nombre`,`Apellido`,`Telefono`,`Direccion`,`Ingreso`,`Fnac`,`Puesto`,`Sueldo`,`Cod_sucursal`) VALUES (:dni, :cla, :nom, :ape, :tel, :dir, :ing, :fec, :pst, :sld, :suc)");
+	
 
+	function postEmpleado($dni,$clave,$name,$ape,$tel,$dir,$fn,$puesto,$sueldo,$sucursal){
 		require'../Modelos/conexion.php';
         date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 		$fecha = date("Y-m-d");
 		#id_empleado	DNI	Nombre	Apellido	Telefono	Direccion	Ingreso	Fnac	Puesto	Sueldo	
 
-		$insert = $conexion->prepare("INSERT INTO `empleados` (`DNI`,`Clave`,`Nombre`,`Apellido`,`Telefono`,`Direccion`,`Ingreso`,`Fnac`,`Puesto`,`Sueldo`) VALUES (:dni, :cla, :nom, :ape, :tel, :dir, :ing, :fec, :pst, :sld)");
-
+		$insert = $conexion->prepare("INSERT INTO `empleados` (`DNI`,`Clave`,`Nombre`,`Apellido`,`Telefono`,`Direccion`,`Ingreso`,`Fnac`,`Puesto`,`Sueldo`,`Cod_sucursal`) VALUES (:dni, :cla, :nom, :ape, :tel, :dir, :ing, :fec, :pst, :sld, :cod)");
 		$insert->bindParam(':dni',$dni);
 		$insert->bindParam(':cla',$clave);
 	    $insert->bindParam(':nom',$name);
@@ -300,53 +235,64 @@ function postOpen($importe,$encargado){
 	   	$insert->bindParam(':fec',$fn);
 	    $insert->bindParam(':pst',$puesto);
 	    $insert->bindParam(':sld',$sueldo);
-	   	$insert->bindParam(':suc',$_SESSION['Cod_sucursal']);
+	    $insert->bindParam(':cod',$sucursal);
 		$insert->execute();
-
 	}
+
+	/****************************************
+	*
+	*	FUNCIONES ESTADISTICAS VENTAS
+	*
+	**********************************/
 	function getVentas(){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT * FROM pedido");
 		$consulta->execute();
         	$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
 
-	function getSucursalByDireccion($dir){
-		require URL;
-		$consulta = $conexion->prepare("SELECT * FROM sucursales WHERE Direccion LIKE '%".$dir."%'");
+	function getPedidosEstadisticas($sql){
+		require '../Modelos/conexion.php';
+		$consulta=$conexion->prepare($sql);
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
+		return count($datos);
+	}	
+
+	function getProductos(){
+		require '../Modelos/conexion.php';
+		$consulta=$conexion->prepare("SELECT Nombre FROM productos");
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	}
-		
-#Login
+	/****************************************
+	*
+	*	FUNCIONES LOGIN
+	*
+	**********************************/
 	function userExists($DNI, $Clave) {
-		require URL;
+		require '../Modelos/conexion.php';
 		$consulta = $conexion->prepare("SELECT empleados.Nombre, empleados.DNI, sucursales.Direccion, sucursales.Cod_sucursal FROM empleados JOIN sucursales ON empleados.Cod_sucursal=sucursales.Cod_sucursal WHERE empleados.DNI='$DNI' AND empleados.Clave='$Clave'");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
    }
-#ACA VAN LAS CONSULTAS SQL
+
+   /****************************************
+	*
+	*	FUNCIONES PRODUCTOS
+	*
+	**********************************/
 	function delete_producto($cod){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare("DELETE FROM productos WHERE Id_producto=:cod");
 	    $consulta->bindParam(":cod",$cod);
 	    $consulta->execute();
 	}
 
 	function view_tabla($nombre){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT * FROM $nombre");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -354,10 +300,7 @@ function postOpen($importe,$encargado){
 	}
 	
 	function view_tabla2($nombre){
-		require URL;
-
 		require'../../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT * FROM $nombre");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -366,10 +309,7 @@ function postOpen($importe,$encargado){
 
 	//FUNCIONES PRODUCTOS
 	function update_producto($id,$nombre,$descri,$precio){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare(" UPDATE productos SET Nombre=:nom, Descripcion=:des, Costo=:pre WHERE productos.Id_producto=:id;");	    
 		$consulta->bindParam(':nom',$nombre);
 		$consulta->bindParam(':des',$descri);
@@ -377,22 +317,17 @@ function postOpen($importe,$encargado){
 	    $consulta->bindParam(':id',$id);
 	    $consulta->execute();
 	}
-	function getProductos(){
-		require URL;
-		$consulta=$conexion->prepare("SELECT Nombre FROM productos");
-		$consulta->execute();
-		return $consulta->fetchAll(PDO::FETCH_ASSOC);
-	}
+
 	function insert_producto($nombre,$descri,$precio){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT Id_producto FROM productos");
 		$consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $nump_id=0;
         foreach($datos as $elemento){
-        	$nump_id = $elemento['Id_producto'];
+        	if ($elemento['Id_producto'] > $nump_id) {
+        		$nump_id = $elemento['Id_producto'];
+        	}
         }
         $nump_id++;
         //echo $nump_id;
@@ -404,44 +339,34 @@ function postOpen($importe,$encargado){
 	    return $consulta->execute();
 	}
 
-	///FUNCIONES PEDIDOS
-	function getPedidosEstadisticas($sql){
-		require URL;
-		$consulta=$conexion->prepare($sql);
-		$consulta->execute();
-		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return count($datos);
-	}
+	/****************************************
+	*
+	*	FUNCIONES CRUD PEDIDOS
+	*
+	**********************************/
 	function search_pedido($nombre,$mesa,$id){
-		require URL;
-
 		require'../../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT * FROM pedido WHERE `idPedido` = '$id' AND `cliente` = '$nombre' AND `mesa` = '$mesa' ");
 		$consulta->execute();
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
 
-	function agregar_pedido($producto,$nombre,$cant,$mesa,$id,$estado){
-		require URL;
-
+	function agregar_pedido($producto,$nombre,$cant,$mesa,$id,$estado,$sucursal){
 		require'../Modelos/conexion.php';
-
 		$consulta = $conexion->prepare("SELECT Cod_pedido FROM pedido");
 		$consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $nump_id=0;
         foreach($datos as $elemento){
-        	$nump_id = $elemento['Cod_pedido'];
+        	if ($elemento['Cod_pedido']>$nump_id) {
+        		$nump_id = $elemento['Cod_pedido'];
+        	}
         }
         $nump_id++;
         //echo $nump_id;
         $fecha=date("Y-m-d");
-        $hora=date("H:i:s");
-        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`,`hora`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est, :hour);");
-
-        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est);");
-
+        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`,`Cod_sucursal`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est, :suc);");
         $consulta->bindParam(':mesa',$mesa);
 		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
 		$consulta->bindParam(':fec',$fecha);
@@ -450,15 +375,12 @@ function postOpen($importe,$encargado){
 	    $consulta->bindParam(':id',$id);
 	    $consulta->bindParam(':est',$estado);
 	    $consulta->bindParam(':cod',$nump_id);
-	   	$consulta->bindParam(':hour',$hora);
+	    $consulta->bindParam(':suc',$sucursal);
 	    return $consulta->execute();
 	}
 
 	function update_pedido($cod,$id,$producto,$cant){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare(" UPDATE pedido SET idPedido=:id, producto=:pro, cantidad=:cant WHERE pedido.Cod_pedido=:cod;");
 	    $consulta->bindParam(':cant',$cant);
 	    $consulta->bindParam(':pro',$producto);
@@ -468,10 +390,7 @@ function postOpen($importe,$encargado){
 	}
 
 	function delete_pedido($id,$producto,$accion){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		if ($accion == "eliminarPro") {//Si eliminar el producto del pedido
 			$consulta=$conexion->prepare("DELETE FROM pedido WHERE idPedido=:id AND producto=:pro");
 			$consulta->bindParam(":pro",$producto);
@@ -484,26 +403,151 @@ function postOpen($importe,$encargado){
 	}
 
 	function estado_pedido($estado,$id){
-		require URL;
-
 		require '../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare(" UPDATE pedido SET estado=:est WHERE pedido.idPedido=:id;");
 	    $consulta->bindParam(':est',$estado);
 	    $consulta->bindParam(':id',$id);
 	    $consulta->execute();
 	}
 
-	//FUNCIONES MESAS
+	/*******************************
+	*
+	*	FUNCIONES DE MESAS
+	*
+	*************************************/
+	function insert_mesa($cant,$codS){
+		require '../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM mesas");
+		$consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $id=0;
+        $mesa=0;
+        foreach($datos as $elemento){
+        	$id = $elemento['cod_mesa'];
+        	if ($elemento['Cod_sucursal'] == $codS) {
+        		$mesa=$elemento['mesa'];
+        	}
+        }
+        $id++;
+        $mesa++;
+		for ($i=1; $i <= $cant; $i++) {
+			$insert = $conexion->prepare("INSERT INTO `mesas` (`cod_mesa`,`Cod_sucursal`,`mesa`,`estado`) VALUES (:id, :cods, :mes, 'libre')");
+			$insert->bindParam(':id',$id);
+			$insert->bindParam(':cods',$codS);
+			$insert->bindParam(':mes',$mesa);
+			$insert->execute();
+			$id++;
+			$mesa++;
+		}
+	}
+
+	function delete_mesa($cant,$codS){
+		require '../Modelos/conexion.php';
+		if ($cant>0) {//SI elimina algunas mesas
+			$consulta = $conexion->prepare("SELECT * FROM mesas WHERE Cod_sucursal='$codS'");
+			$consulta->execute();
+	        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+	        for ($i=count($datos)-1; $i > ((count($datos)-1)-$cant) ; $i--) { 
+	        	$consulta = $conexion->prepare("DELETE FROM mesas WHERE cod_mesa='".$datos[$i]['cod_mesa']."'");
+				$consulta->execute();
+	        }
+
+		}//SI elimina algunas mesas
+		else{//SI elimina todas las mesas
+			$consulta = $conexion->prepare("DELETE FROM mesas WHERE Cod_sucursal='$codS'");
+			$consulta->execute();
+		}//SI elimina todas las mesas
+	}
+
 	function estado_mesa($cod,$mesa,$estado){
-		require URL;
-
 		require'../Modelos/conexion.php';
-
 		$consulta=$conexion->prepare(" UPDATE mesas SET estado=:est WHERE mesas.cod_sucursal=:cod AND mesas.mesa=:mesa;");
 		$consulta->bindParam(':est',$estado);
 	    $consulta->bindParam(':mesa',$mesa);
 	    $consulta->bindParam(':cod',$cod);
 	    $consulta->execute();
-	}	
+	}
+	/****************************************
+	*
+	*	FUNCIONES EDITAR LOGO Y TITULO
+	*
+	**********************************/
+	function editLocal($nombre,$logo){
+		require '../Modelos/conexion.php';
+		$consulta=$conexion->prepare(" UPDATE infosucursal SET nombre=:tit, logo=:log WHERE infosucursal.id='1';");
+		$consulta->bindParam(':tit',$nombre);
+	    $consulta->bindParam(':log',$logo);
+	    $consulta->execute();
+	}
+	/****************************************
+	*
+	*	FUNCIONES CRUD STOCK
+	*
+	**********************************/
+	function insert_stock($nombre,$cant,$sucursal){
+		require'../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM stock");
+		$consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $nump_id=0;
+        foreach($datos as $elemento){
+        	if ($elemento['Cod_producto']>$nump_id) {
+        		$nump_id = $elemento['Cod_producto'];
+        	}
+        }
+        $nump_id++;
+        //echo $nump_id;
+        $consulta=$conexion-> prepare("INSERT INTO `stock` (`Cod_producto`, `Nombre`, `Cantidad`, `Cod_sucursal`) VALUES (:cod, :nom, :cant,:suc);");
+		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
+	    $consulta->bindParam(':cant',$cant);
+	    $consulta->bindParam(':cod',$nump_id);
+	    $consulta->bindParam(':suc',$sucursal);
+	    $consulta->execute();
+	}
+
+	function delete_stock($cod){
+		require'../Modelos/conexion.php';
+		$consulta=$conexion->prepare("DELETE FROM stock WHERE Cod_producto=:cod");
+	    $consulta->bindParam(":cod",$cod);
+	    $consulta->execute();
+	}
+
+	function update_stock($cod,$nombre,$cant){
+		require'../Modelos/conexion.php';
+		$consulta=$conexion->prepare(" UPDATE stock SET nombre=:nom, cantidad=:cant WHERE stock.Cod_producto=:cod;");
+	    $consulta->bindParam(':cant',$cant);
+	    $consulta->bindParam(':nom',$nombre);
+	    $consulta->bindParam(':cod',$cod);
+	    $consulta->execute();
+	}
+
+	/*****************************************
+	 * 
+	 * 		FUNCIONES DESCUENTOS
+	 * 
+	 ****************************************/
+
+	 function insert_descuento($nombre,$descuento,$productos,$fecha) {
+		var_dump($productos);
+		require'../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM promociones");
+		$consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $nump_id=0;
+        foreach($datos as $elemento){
+        	if ($elemento['id_promo']>$nump_id) {
+        		$nump_id = $elemento['id_promo'];
+        	}
+        }
+        $nump_id++;
+        //echo $nump_id;
+        $consulta=$conexion-> prepare("INSERT INTO `promociones` (`id_promo`, `nombre`, `productos`, `precio`,`fechaDuracion`) VALUES (:cod, :nom, :pro,:de,:fec);");
+		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
+	    $consulta->bindParam(':pro',$productos);
+	    $consulta->bindParam(':cod',$nump_id);
+	    $consulta->bindParam(':de',$descuento);
+		$consulta->bindParam(':fec',$fecha);
+	    $consulta->execute();
+	 }
 ?>

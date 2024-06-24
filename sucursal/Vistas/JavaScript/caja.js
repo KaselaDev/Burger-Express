@@ -1,10 +1,10 @@
 
 function add(){
-    const contenido= `<form action=../Controladores/up_gasto.php method="post">
+    const contenido= `<form action='../Controladores/up_gasto.php' method="post">
         
         Monto:
         <p>
-        <input type="double" name="monto"  class="swal2-input" required>
+        <input type="text" name="monto"  class="swal2-input" required>
         <p>
         Descripcion:
         <p>
@@ -23,4 +23,6 @@ function add(){
         footer:"",
     });
     
+
 }
+

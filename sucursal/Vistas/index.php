@@ -1,10 +1,17 @@
 <?php 
 
 include 'header.php';
-include '../Modelos/consultas.php';
 date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 $fecha = date("Y-m-d");
-
+$set = getCaja($fecha);
+if(empty($set)){
+    if(isset($_POST['caja'])){
+            postOpen($_POST['caja'],"yo");
+    } 
+    else{
+        echo'<script type="text/javascript" src="JavaScript/index.js"></script>';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +19,8 @@ $fecha = date("Y-m-d");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-   
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
 </head>
 <body>
     <section class="menu">
@@ -36,7 +44,7 @@ $fecha = date("Y-m-d");
             <span class="material-symbols-outlined">monitoring</span>
             <h2>Stock</h2>
         </a>
-        <a href="estadisticasVentas.php" class="inicio">
+        <a href="estadisticas.php" class="inicio">
             <span class="material-symbols-outlined">stacked_bar_chart</span>
             <h2>Estadisticas Ventas</h2>
         </a>

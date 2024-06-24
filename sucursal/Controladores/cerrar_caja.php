@@ -1,5 +1,6 @@
 <?php
 require '../Modelos/consultas.php';
 cerrarCaja();
-header('location:../Vistas/caja.php');
+session_destroy();
+header('location:../index.php');
 ?>

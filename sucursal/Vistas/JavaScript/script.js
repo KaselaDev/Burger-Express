@@ -166,12 +166,12 @@ function nombre(mesa){
   })()
 }
 
-function addPedido(producto,mesa,id,nombre) {
+function addPedido(producto,mesa,id,nombre,sucursal) {
     console.log(producto+id+mesa+nombre)
-    window.location.assign(`../../Controladores/agregar_pedido.php?pro=${producto}&mesa=${mesa}&id=${id}&nom=${nombre}`);
+    window.location.assign(`../../Controladores/agregar_pedido.php?pro=${producto}&mesa=${mesa}&id=${id}&nom=${nombre}&suc=${sucursal}`);
 }
 
-function eliminar_pedido(cod,accion){
+function eliminar_pedido(cod,accion,sucursal){
     Swal.fire({
         title: "Realmente desea eliminar este pedido?",
         text: "",
@@ -182,12 +182,12 @@ function eliminar_pedido(cod,accion){
         confirmButtonText: "Si, Eliminarla!"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&ac=${accion}`
+            window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&ac=${accion}&suc=${sucursal}`
         }
     });
 }
 
-function realizar_pedido(cod, id){
+function realizar_pedido(cod, id,sucursal){
     Swal.fire({
         title: "Desea realizar el pedido?",
         text: "",
@@ -198,7 +198,7 @@ function realizar_pedido(cod, id){
         confirmButtonText: "Si, realizar"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = `../../Controladores/realizar_pedido.php?ubi=${cod}&id=${id}`
+            window.location.href = `../../Controladores/realizar_pedido.php?ubi=${cod}&id=${id}&suc=${sucursal}`
         }
     });
 }
@@ -217,7 +217,7 @@ function ver_pedido(mesa,accion) {
 
 }
 
-function limpiar_mesa(cod,id){
+function limpiar_mesa(cod,id,sucursal){
     Swal.fire({
         title: "Desea desocupar la mesa?",
         text: "",
@@ -228,23 +228,111 @@ function limpiar_mesa(cod,id){
         confirmButtonText: "Si, realizar"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = `../../Controladores/limpiar_mesa.php?ubi=${cod}&id=${id}`
+            window.location.href = `../../Controladores/limpiar_mesa.php?ubi=${cod}&id=${id}&suc=${sucursal}`
         }
     });
 }
 
-function estado_pedido(){
-    Swal.fire({
-        title: "Se a preparado el pedido?",
-        text: "",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, realizar"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            //window.location.href = `../../Controladores/limpiar_mesa.php`
-        }
+
+/********************************
+*
+*       FUNCIONES DESCUENTO
+*
+*********************************/
+function addDescuento(productos) {
+    (async()=>{
+    const { value: nombre } = await Swal.fire({
+      title: "Agregar Descuento",
+      html: `<input type="number" class="swal2-input" id="cant" min="1" max="5" placeholder="Ingrese la Cantidad de productos" style="width:70%;">`,
+      inputAutoFocus: true,
+      showCloseButton: true,
+      confirmButtonColor: "ligthblue",
+      confirmButtonText: "Siguiente",
+      position: 'center',
     });
+
+    const cantidad=document.getElementById('cant')
+    if (cantidad.value) {
+        console.log(productos)
+        let contenido=`
+            <form method="post" action="../Controladores/agregar_descuento.php" style="font-size:.9rem;">
+                <label for="ing_pre">Nombre del Descuento
+                <p>
+                <input type="text" name="nom" class="swal2-input" min="1" max="100" required></label>
+                <p>
+        `
+        for (var i = 1; i <= cantidad.value; i++) {
+            contenido=contenido+`
+                <label>${i}º Producto
+                <p>
+                <select name="pro" class="swal2-input" style="margin: 10px;">`
+            productos.forEach(({Id_producto,Nombre})=>{
+                contenido=contenido+`<option value="${Id_producto}">${Nombre}</option>`
+            })
+            contenido=contenido+`
+                </select></label>
+                <p>
+            `
+        }
+        contenido=contenido+`
+                <label for="ing_pre">Descuento
+                <p>
+                <input type="number" name="ing_pre" class="swal2-input" min="1" max="100" required></label>
+                <p>
+                <button type="submit" class="buton-carrito-r" style="margin:10px 0;">Agregar</button>
+            </form>
+        `
+
+        Swal.fire({
+          title: "Agregar Descuento",
+          html: contenido,
+          showCloseButton: true,
+          showConfirmButton: false,
+        });
+
+    }
+  })()
+}
+
+ function addDescuento2(productos,date) {
+ 
+    let contenido=`
+        <form action="../Controladores/agregar_descuento.php" method="post" style="font-size:.9rem;">
+            <label>Fecha de duracion   
+            <p>
+            <input type="date" name="fecha" min="${date}" value="${date}" class="swal2-input" required></label>
+            <p>
+            <label>Nombre del Descuento
+            <p>
+            <input type="text" name="nombre" class="swal2-input" required></label>
+            <p>
+        `
+        
+    contenido=contenido+`
+            Productos
+            <p>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;border:1px solid;margin:10px 0;padding:5px;">
+            `
+    productos.forEach(({Id_producto,Nombre})=>{
+        //console.log(`pro${Id_producto}`)
+        contenido=contenido+`<label><input type="checkbox" name="pro${Id_producto}" value="${Id_producto}">${Nombre}</label>`
+    })
+    contenido=contenido+`
+            </div>
+            <p>
+            <label>Descuento
+            <p>
+            <input type="number" name="descuento" class="swal2-input" min="1" max="100" required></label>
+            <p>
+            <button type="submit" class="buton-carrito-r" style="margin:10px 0;">Agregar</button>
+        </form>
+    `
+
+    Swal.fire({
+        title: "Agregar Descuento",
+        html: contenido,
+        showCloseButton: true,
+        showConfirmButton: false,
+    });
+
 }

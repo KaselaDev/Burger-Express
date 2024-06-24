@@ -13,7 +13,7 @@
         html: contenido,
         allowOutsideClick: false,
         showConfirmButton: false,
-        footer:"Asegurese de ingresar bien el importe"
+        footer:"Asegurese de ingresar bien el importe",
     });
     
-})
+});

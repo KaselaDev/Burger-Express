@@ -1,8 +1,10 @@
 <?php 
 	include 'header_user.php'; 
+
 	$mesa=filter_input(INPUT_GET, 'mesa');
 	$tablaProductos=view_tabla2("productos");
 	$tablaPedido=view_tabla2("pedido");
+    $sucursal=$_SESSION['Cod_sucursal'];
 	foreach ($tablaPedido as $key) {//foreach recorre tabla 'pedido' y obtine el cliente y el idPedido
         if ($key['mesa'] == $mesa) {//si para buscar las mesas
             $nombre=$key['cliente'];
@@ -42,7 +44,7 @@
 		<div class="pedido" style="display: flex;justify-content: center;">
 			<div class="pedido-caja">
 				<h3 style="font-size: 1.7rem;"><span class="material-symbols-outlined"  style="font-size: 1.7rem;">menu_book</span>Pedido</h3>
-				<p>Id Pedido: <?= $idPedido ?></p>
+				<p>Nº Pedido: <?= $idPedido ?></p>
 				<p>Fecha <?= $fecha ?></p>
                 <p>Cliente: <b><?= $nombre ?></b></p>
                 <p>Mesa: <b><?= $mesa ?></b></p>
@@ -67,7 +69,7 @@
                 
 			</div>
 		</div>
-		<button class="buton-carrito-c" style="margin: 10px 0;" onclick="limpiar_mesa(<?= $mesa ?>,<?= $idPedido ?>)">
+		<button class="buton-carrito-c" style="margin: 10px 0;" onclick="limpiar_mesa(<?= $mesa ?>,<?= $idPedido ?>,<?= $sucursal ?>)">
             Desocupar Mesa
         </button>
 	</section>

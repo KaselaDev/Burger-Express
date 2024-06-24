@@ -20,7 +20,7 @@ function modificar(a, b, c, d, e){
         <p>
         <input type="text" name="direccion" placeholder="${b}" value="${b}" class="swal2-input">
         <p>
-        Capacidad:
+        Cantidad de Mesas:
         <p>
          <input type="number" name="capacidad" placeholder="${c}" value="${c}" min="0" class="swal2-input">
         <p> 
@@ -53,7 +53,7 @@ function add(){
         <p>
         <input type="text" name="dir"  class="swal2-input" required>
         <p>
-        Capacidad:
+        Cantidad de Mesas:
         <p>
          <input type="number" name="cap"  class="swal2-input" min="0" required>
         <p>

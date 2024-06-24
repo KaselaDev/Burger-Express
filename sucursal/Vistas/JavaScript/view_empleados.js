@@ -52,7 +52,7 @@ function modificar(a, b, c, d, e, f, g, h, i, j){
         <p>
         Sueldo
         <p>
-         <input type="double" name="sueldo" placeholder="${i}" value="${i}" min="0" class="swal2-input">
+         <input type="number" name="sueldo" placeholder="${i}" value="${i}" min="0" class="swal2-input">
         <p> 
         <button type="submit" class="buton-carrito-r">Modificar</button>
         </form>
@@ -69,7 +69,7 @@ function modificar(a, b, c, d, e, f, g, h, i, j){
     
 }
 
-function add(){
+function add(cod){
     const contenido= `<form action='../Controladores/up_empleado.php' method="post">
         
         DNI:
@@ -106,8 +106,9 @@ function add(){
         <p>
          Sueldo:
         <p>
-         <input type="double" name="sueldo" min="0" class="swal2-input" required>
+         <input type="number" name="sueldo" min="0" class="swal2-input" required>
         <p>
+        <input type="hidden" name="sucursal" value="${cod}">
         <button type="submit" class="buton-carrito-r">Ingresar</button>
         </form>
         <p style="margin-top:10px;">

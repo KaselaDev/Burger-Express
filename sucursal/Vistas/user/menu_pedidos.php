@@ -1,18 +1,18 @@
-<?php include 'header_user.php';  require '../../Modelos/consultas.php'; ?>
+<?php include 'header_user.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../JavaScript/script.js"></script>
+    <script src="./JavaScript/script.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../JavaScript/script.js"></script>
     <title>Mesas</title>
 </head>
 <body>
     <section class="menu">
-        <h2>Pedidos</h2>
+        <h2>Realizar Pedido</h2>
         <ul style="list-style:none;line-height:25px;display: flex;gap:10px;">
             <li>
                 <span style="margin-right: 10px;background-color: red;padding: 0px 5px;border: 1px solid black;border-radius: 5px;"> </span>Mesa ocupada
@@ -28,9 +28,9 @@
         <?php
             $tablaPedido= view_tabla2("pedido");
             $tablaMesas=view_tabla2("mesas");
-            $idSucursal=1; 
+            $idSucursal=$_SESSION['Cod_sucursal']; 
             foreach ($tablaMesas as $key) {//foreach recorre tabla 'sucursales'
-                if ($key['cod_sucursal'] == $idSucursal) {//si para saber que sucursal pertenece
+                if ($key['Cod_sucursal'] == $idSucursal) {//si para saber que sucursal pertenece
                        if ($key['estado'] == 'ocupada') {//si la mesa esta ocupada
                             $estadoMesa="background-color: red;";
                             $accion="ver_pedido(".$key['mesa'].",'finalizado')";
@@ -43,9 +43,6 @@
                             $estadoMesa="background-color: white;";
                             $accion="nombre(".$key['mesa'].")";
                        }//si la mesa esta libre  
-                       if(cajaCerrada()){
-                        $accion = "block()";
-                       }
                        ?>
                         <div class="mesas" onclick="<?= $accion?>" style="<?= $estadoMesa ?>cursor:pointer;">
                             Mesa <?= $key['mesa'] ?>

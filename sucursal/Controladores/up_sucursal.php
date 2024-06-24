@@ -10,7 +10,6 @@
 	$direccion = filter_input(INPUT_POST, 'dir');
 	$capacidad = filter_input(INPUT_POST, 'cap');
 	postSucursal($direccion,$capacidad);
-		
 ?>
 
 <script type="text/javascript">
