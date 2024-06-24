@@ -1,6 +1,4 @@
-<?php include 'header.php';
-include_once'../Modelos/consultas.php';
-?>
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +10,7 @@ include_once'../Modelos/consultas.php';
 <body>
 	<section>
         <h1 style="text-align:center;">SUCURSALES</h1>
-        <form action="" method="post" class="menu">            
+        <form action="" method="post" class="menu-select">            
             <ul class="links">
                 <?php
                    $sucursales = getSucursales();
@@ -22,7 +20,6 @@ include_once'../Modelos/consultas.php';
                    }
 
                 ?>
-                
             </ul>
         </form>
     </section>

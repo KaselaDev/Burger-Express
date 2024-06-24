@@ -5,9 +5,9 @@
 	//include'header.php';
 	require'../Modelos/consultas.php';
 	$cod=filter_input(INPUT_GET, 'codigo');
+	$Sucursal=filter_input(INPUT_GET, 'sucursal');
 	if(isset($cod)){
-		delete_mesa(0,$cod);
-		deleteSucursal($cod);
+		delete_stock($cod);
 	}else{
 		header('location:../Vistas/index.php');
 	}
@@ -16,12 +16,11 @@
 		Swal.fire({
 	  		icon: "success",
 	 		title: "Realizado...",
-	  		text: "Sucursal eliminada con exito",
-	  		footer: "",
+	  		text: "Producto eliminado con exito",
+	  		showConfirmButton: false,
+	  		timer: 1000
 		}).then((result) => {
-    if (result.isConfirmed) {
-    	console.log("view")
-		window.location.href = "../Vistas/view_sucursales.php"
-	}});
+			window.location.href = "../Vistas/infoStock.php"
+		});
 	</script>
 

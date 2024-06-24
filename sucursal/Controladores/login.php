@@ -13,11 +13,10 @@
         foreach($datos as $elemento){
             $_SESSION['usuario'] = $elemento['Nombre'];
             $_SESSION['DNI'] = $elemento['DNI'];
-            $_SESSION['sucursal'] = $elemento['Direccion'];
+            $_SESSION['sucursal']=$elemento['Direccion'];
             $_SESSION['Cod_sucursal']=$elemento['Cod_sucursal'];
-        }
-
-        header('Location:../Vistas/user/index.php'); 
+            header('Location:../Vistas/user/index.php'); 
+        } 
     }
     if ($DNI=='0101' && $Clave=='admin' ) {
         $_SESSION['usuario'] = "admin";

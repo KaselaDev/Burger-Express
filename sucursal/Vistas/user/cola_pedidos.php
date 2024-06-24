@@ -1,5 +1,4 @@
-
-<?php include 'header_user.php'; include '../../Modelos/consultas.php'; ?>
+<?php include 'header_user.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

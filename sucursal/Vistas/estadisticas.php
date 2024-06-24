@@ -1,8 +1,7 @@
 <?php
-    require "header.php";
-    require "../Modelos/consultas.php";
+    include_once "header.php";
     date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
-
+    //var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <title>Estadisticas de ventas</title>
 </head>
 <body>
@@ -39,6 +37,7 @@
 </section>
 </body>
 <?php
+
 	if(isset($_POST['op'])){
 		$_SESSION['op']=$_POST['op'];
 	}

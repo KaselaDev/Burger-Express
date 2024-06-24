@@ -1,11 +1,14 @@
 <?php 
     include 'header_user.php';
+
     $nombre=filter_input(INPUT_GET,'nom');
     $mesa=filter_input(INPUT_GET,'mesa');
     $accion=filter_input(INPUT_GET,'ac');
     $idPedido=filter_input(INPUT_GET, 'id');
+    $sucursal=$_SESSION['Cod_sucursal'];
     $tablaProductos=view_tabla2("productos");
-    $tablaPedido=view_tabla2("pedido");
+    $tablaStock=view_tabla2("stock WHERE Cod_sucursal='".$sucursal."'");
+    $tablaPedido=view_tabla2("pedido WHERE Cod_sucursal='".$sucursal."'");
    
     if ($accion == "nuevo") {//Si es un nuevo pedido
        foreach ($tablaPedido as $key) {//For each obtiene el idPedido
@@ -58,11 +61,11 @@
                     <p>Cliente: <b><?= $nombre ?></b></p>
                     <p>Cantidad Productos <b><?= $cantPedido ?></b></p>
                     <p>Total: <b>$<?= $total ?></b></p>
-                    <button class="buton-carrito-r" onclick="realizar_pedido(<?= $mesa ?>,<?= $idPedido ?> )">   
+                    <button class="buton-carrito-r" onclick="realizar_pedido(<?= $mesa ?>,<?= $idPedido ?>,<?= $sucursal ?> )">   
                         <span class="material-symbols-outlined"  id="buton-ico">check</span>
                         <span class="buton-text">Realizar Pedido</span>
                     </button>
-                    <button class="buton-carrito-c" onclick="eliminar_pedido(<?= $idPedido ?>, 'elPedido')">
+                    <button class="buton-carrito-c" onclick="eliminar_pedido(<?= $idPedido ?>, 'elPedido',<?= $sucursal ?>)">
                         <span class="material-symbols-outlined"  id="buton-ico">close</span>
                         <span class="buton-text">Cancelar Pedido</span>
                     </button>
@@ -81,14 +84,18 @@
                         </tr>
                     <?php
                         foreach ($tablaProductos as $key) {//Foreach recorre productos de base
+                            foreach ($tablaStock as $ele) {//Foreach recorre tabla stock
+                                if ($key['Nombre'] == $ele['Nombre'] && $ele['Cantidad']>0) {//SI el producto esta habilitado en la sucursal
                             ?>
                             <tr>
                                 <td><?= $key['Nombre'] ?></td>
                                 <td><?= $key['Descripcion'] ?></td>
                                 <td>$<?= $key['Costo'] ?></td>
-                                <td><button class="buton-agregar" onclick="addPedido('<?= $key['Nombre'] ?>',<?= $mesa ?>,<?= $idPedido ?>,'<?= $nombre ?>')"><span class="material-symbols-outlined">add_circle</span></button></td>
+                                <td><button class="buton-agregar" onclick="addPedido('<?= $key['Nombre'] ?>',<?= $mesa ?>,<?= $idPedido ?>,'<?= $nombre ?>',<?= $sucursal ?>)"><span class="material-symbols-outlined">add_circle</span></button></td>
                             </tr>                           
-                            <?php
+                            <?php        
+                                }//SI el producto esta habilitado en la sucursal
+                            }//Foreach recorre tabla stock
                         }//Foreach recorre productos de base
                     ?>
                     </table>
@@ -98,7 +105,13 @@
                     <h3><span class="material-symbols-outlined">list_alt</span>Pedido</h3>
                     <?php 
                         $tablaPedidoCliente=search_pedido($nombre,$mesa,$idPedido);
-                        if (!empty($tablaPedidoCliente)) {//SI ecuentra el pedido meustre el 'pedido'
+                        $val=true;
+                        foreach ($tablaPedidoCliente as $ele) {
+                            if ($ele['cantidad']>0) {
+                                $val=false;
+                            }
+                        }
+                        if (!$val) {//SI ecuentra el pedido meustre el 'pedido'
                             ?>
                             <table id="table" border="1">
                                 <tr>
@@ -108,6 +121,7 @@
                                 </tr>
                             <?php
                             foreach ($tablaPedidoCliente as $key) {//Foreaach recoorre tabla 'pedidos'
+                                if ($key['cantidad']>0) {
                                 ?>
                                 <tr>
                                     <td><?= $key['producto'] ?></td>
@@ -116,7 +130,8 @@
                                         <button class="buton-agregar" style="background-color: red;" onclick="eliminar_pedidoProducto(<?= $idPedido ?>,'<?= $key['producto'] ?>', 'elProducto')"><span class="material-symbols-outlined">delete</span></button>
                                     </td>
                                 </tr>
-                                <?php    
+                                <?php 
+                                }  
                             }//Foreaach recoorre tabla 'pedidos' 
                             ?>
                             </table>
