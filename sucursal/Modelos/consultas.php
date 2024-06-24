@@ -18,7 +18,23 @@ function cerrarCaja(){
 		$fecha = date("Y-m-d");
 		$consulta=$conexion->prepare("SELECT cierre FROM caja WHERE fecha LIKE '%".$fecha."%'");
 		$consulta->execute();
-		$datos=$consulta->fetchAll(PDO::FETCH_ASSOC);
+		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		foreach($datos as $caja){
+			$cierre = $datos[0];
+		}
+		if(!empty($cierre['cierre'])){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	function getCaja($fecha){
+		require URL;
+		$suc=intval($_SESSION['Cod_sucursal']);
+		$consulta=$conexion->prepare("SELECT actual FROM caja WHERE Cod_sucursal=$suc AND fecha LIKE '%".$fecha."%'");
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	}
 function getCaja($fecha){
 	require '../Modelos/conexion.php';
@@ -99,12 +115,14 @@ function updateGasto($id){
 }
 
 function postOpen($importe,$encargado){
-	require 'conexion.php';
-	$consulta=$conexion->prepare("INSERT INTO `caja` (`apertura`,`actual`,`encargado`) VALUES(:ap, :ac, :enc)");
+
+	require URL;
+	$consulta=$conexion->prepare("INSERT INTO `caja` (`apertura`,`actual`,`encargado`,`Cod_sucursal`) VALUES(:ap, :ac, :enc, :suc)");
 	$consulta->bindParam(':ap',$importe);
 	$consulta->bindParam(':ac',$importe);
 	$consulta->bindParam(':enc',$encargado);
-	$consulta->execute();
+	$consulta->bindParam(':suc',$_SESSION['Cod_sucursal']);
+
 
 }
 

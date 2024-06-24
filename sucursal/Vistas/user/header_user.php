@@ -1,12 +1,15 @@
 <?php session_start(); require '../../Modelos/consultas.php'; $info=view_tabla2('infosucursal');?>
 <nav id='menu'>
-  <div style="display: flex;margin-left: 20px;width: 30%;flex-direction: column;">
-    <div style="display: flex;align-items: center;">
-      <img src="data:image/jpg;base64,<?= $info[0]['logo'] ?>" width="40" height="40">
-      <h2 style="margin:0"><?= $info[0]['nombre'] ?></h2> 
-    </div>
-    <h4 style="color: #00000099;"><?= isset($_SESSION['sucursal']) ? 'Sucursal: '.$_SESSION['sucursal'] : ''; ?></h4>     
-  </div>
+  <h2><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M44 22C44 12.0589 35.0457 4 24 4C12.9543 4 4 12.0589 4 22H44Z" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="38" width="40" height="6" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 28L9.45455 32L16.7273 28L24 32L31.2727 28L38.5455 32L44 28" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>Rapidash</h2>
+  <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+  <?php
+    if(isset($_SESSION['Cod_sucursal'])){
+        echo'<h4 id="sucursal">
+    Sucursal:';
+        echo $_SESSION['sucursal']."</h4>";
+    }    
+    ?>
+   
   <ul>
     <li><a href='index.php'>Inicio</a></li>
     <li><a href="cola_pedidos.php">Pedidos</a></li>
