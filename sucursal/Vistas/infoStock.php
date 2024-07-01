@@ -26,7 +26,6 @@
 </head>
 <body>
     <section>
-        <h2>Stock de Sucursal <?= $_SESSION['sucursal'] ?></h2>
         <?php 
             $sucursal=$_SESSION['Cod_sucursal']; 
 
@@ -37,53 +36,7 @@
                 TABLA STOCK 
 
         ------------------------------------------------>
-        <div class="content-stock">
-            <h2>Tabla de Stock</h2>
-            <table id="table" border="1" width="100%">
-                <tr>
-                    <th>###</th>
-                    <th>Nombre</th>
-                    <th>Cantidad(Unidad)</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                <?php
-                    $n=1;
-                    $sql="WHERE";
-                    $bajoStock=[];
-                    foreach($tablaStock as $db){
-                        if($db['Cantidad']<5) { 
-                            array_push($bajoStock, $db['Nombre']);
-                        }//SI el stock es bajo gurader los nombres
-                        $color = ($n%2)!=0 ? ' ' : 'class="gray"';
-                        echo '<tr '.$color.'>
-                            <td>'.$n.'</td> 
-                            <td>'.$db['Nombre'].'</td> 
-                            <td>'.$db['Cantidad'].'</td>
-                            <td>
-                                <a onclick="modifyStock('.$db['Cod_producto'].',`'.$db['Nombre'].'`,'.$db['Cantidad'].','.$sucursal.')" style="background: green;cursor:pointer"<span class="material-symbols-outlined">edit</span></a>
-                            </td>
-                            <td>
-                                <a onclick="deleteS('.$db['Cod_producto'].','.$sucursal.')" style="background: red;cursor:pointer;"<span class="material-symbols-outlined">delete</span></a>
-                            </td>
-                        </tr>';
-                        $sql.=" Nombre != '".$db['Nombre']."' AND";
-                        $n++;
-                    }  
-                    $sql.="1";
-                    $sql= str_replace('AND1', " ", $sql);
-                    
-                    $tablaProductos=json_encode(view_tabla("productos ".$sql));
-                ?>     
-                <tr>
-                    <td>
-                        <a style="cursor: pointer;" onclick='add(<?=$sucursal?>,<?=$tablaProductos?>)'>
-                            <span class="material-symbols-outlined"  style="background:green;">add</span>
-                        </a>
-                    </td>
-                </tr>  
-            </table>
-        </div> 
+       
         <!---------------------------------------------- 
             
                 GRAFICO STOCK 
@@ -118,12 +71,49 @@
                 }
                 $dataStock=json_encode($dataStock);
                 $nombreStock=json_encode($nombreStock);
-                $bajoStock=json_encode($bajoStock); 
             ?>
             <script src="./JavaScript/infoStock.js"></script>
-            <script>alertStock(<?= $bajoStock ?>)</script>
             <script>graficar(<?=$dataStock?>,<?=$nombreStock?>,"Cantidad","GraficoStock")</script>
         </div>
+         <div class="content-stock">
+            <h2>Tabla de Stock</h2>
+            <table id="table" border="1" width="100%">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+                </tr>
+                <?php
+                    $n=1;
+                    $sql="WHERE";
+                    foreach($tablaStock as $db){
+                        $color = ($n%2)!=0 ? ' ' : 'class="gray"';
+                        echo '<tr '.$color.'>
+                            <td>'.$db['Nombre'].'</td> 
+                            <td>'.$db['Cantidad'].' '.$db['unidad_medicion'].'</td>
+                           
+                            <td>
+                                <a onclick="deleteS('.$db['Cod_producto'].')" style="background: red;cursor:pointer;"<span class="material-symbols-outlined">delete</span></a>
+                            </td>
+                        </tr>';
+                        $sql.=" Nombre != '".$db['Nombre']."' AND";
+                        $n++;
+                    }  
+                    $sql.="1";
+                    $sql= str_replace('AND1', " ", $sql);
+                    
+                    $tablaProductos=json_encode(view_tabla("productos ".$sql));
+                ?>     
+                <tr>
+                    <td>
+                        <a style="cursor: pointer;" onclick='add()'>
+                            <span class="material-symbols-outlined"  style="background:green;">add</span>
+                        </a>
+                    </td>
+                </tr>  
+            </table>
+            <h4>Nota: solo los productos que se contabilizan como unidades se descuentan automaticamente, los demas deben ser actualizados manualmente</h4>
+        </div> 
         <?php 
             }//SI La tabla stock no esta vacia muestre el grafico
         ?>

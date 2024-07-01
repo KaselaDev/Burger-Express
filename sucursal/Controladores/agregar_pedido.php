@@ -18,16 +18,22 @@
 
 	if ($val) {
 		agregar_pedido($producto,$nombre,'1',$mesa,$idPedido,'tomando..',$sucursal);
-		estado_mesa($sucursal,$mesa,"en proceso");  
+		estado_mesa($sucursal,$mesa,"en proceso"); 
 	}
 
 	$tablaStock=view_tabla("stock WHERE Cod_sucursal='".$sucursal."'");	
 	///CIclo para restar el sotck del producto
-	foreach ($tablaStock as $key) {//Foreach recorre tabla 'stock'
-		if ($producto==$key['Nombre']) {
-			update_stock($key['Cod_producto'],$key['Nombre'],$key['Cantidad']-1);
+	$datos = view_tabla("productos");
+	foreach ($tablaPedido as $pedido) {//Foreach recorre tabla 'stock'
+		foreach($datos as $prod){
+			if($prod['Nombre']==$pedido['producto']){
+				$ingredientes=explode(",",$prod['ingredientes']);
+				for($ingredientes as $ing){
+					desc_stock($ing);
+				}
+			}
+
 		}
 	}//Foreach recorre tabla 'stock'
-	echo $nombre.$mesa.$idPedido.$producto.$sucursal;
 	header("Location:../Vistas/user/tomar_pedido.php?nom=$nombre&mesa=$mesa&id=$idPedido");
  ?>

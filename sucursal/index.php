@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapidash</title>
-    <link rel="stylesheet" type="text/css" href="Vistas/styles/login.css">
-</head>
+    	<link rel="stylesheet" type="text/css" href="Vistas/styles/style.css">
 
+</head>
 <body>
 <center><div class="mainbox">
 		<form action="Controladores/login.php" method="post">
@@ -27,18 +27,3 @@
 	</center>
 </body>
 </html>
-<?php 
-	require 'Modelos/conexion.php';
-
-	$consulta=$conexion->prepare("SELECT * FROM promociones");
-	$consulta->execute();
-	$tablaPro=$consulta->fetchAll(PDO::FETCH_ASSOC);
- 	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
- 	foreach ($tablaPro as $key) {
- 		//Averigua si el descuento expiro, si es asi los elimina
- 		if ($key['fechaDuracion']<date("Y-m-d")) {
- 			$consulta=$conexion->prepare("DELETE FROM promociones WHERE id_promo='".$key['id_promo']."'");
- 			$consulta->execute();
- 		}
- 	}
- ?>

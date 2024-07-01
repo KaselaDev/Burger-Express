@@ -4,7 +4,6 @@
 	$mesa=filter_input(INPUT_GET, 'mesa');
 	$tablaProductos=view_tabla2("productos");
 	$tablaPedido=view_tabla2("pedido");
-    $tablaPromo=view_tabla2("promociones");
     $sucursal=$_SESSION['Cod_sucursal'];
 	foreach ($tablaPedido as $key) {//foreach recorre tabla 'pedido' y obtine el cliente y el idPedido
         if ($key['mesa'] == $mesa) {//si para buscar las mesas
@@ -17,34 +16,19 @@
     $tablaPedidoCliente=search_pedido($nombre,$mesa,$idPedido);
     $cantPedido=0;
     $total=0;
-    //Foreach recorre tabla 'pedido'
-    foreach ($tablaPedidoCliente as $key) {
-        //Si el idPedido coincide
-        $cantPedido=$cantPedido+$key['cantidad'];
-        //Foreach recorre tabla 'producto'
-        foreach ($tablaProductos as $ele) { 
-            $precioPro=$ele['Costo'];
-            foreach ($tablaPromo as $value) {
-                $pro=json_decode($value['productos']);
-                for ($i=0; $i < count($pro); $i++) { 
-                    //Si el producto tiene descuento los descuento
-                    if ($pro[$i] == $ele['Id_producto']) {
-                        $descuento="0.".$value['descuento'];
-                        $preResta=$ele['Costo']*$descuento;
-                        $precioPro=$precioPro-$preResta;
-                    }
-                }
-            } 
+    foreach ($tablaPedidoCliente as $key) {//Foreach recorre tabla 'pedido'
+        if ($idPedido == $key['idPedido']) {//Si el idPedido coincide
+            $cantPedido=$cantPedido+$key['cantidad'];
+            foreach ($tablaProductos as $ele) {//Foreach recorre tabla 'producto'
+                if ($key['producto']  == $ele['Nombre']) {//si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
+                    for ($i=0; $i < $key['cantidad']; $i++) {//for recorre segun la cantidad del producto
+                       $total=$total+$ele['Costo']; 
+                    }//for recorre segun la cantidad del producto
+                }//si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
+            }//Foreach recorre tabla 'producto'
+        }//Si el idPedido coincide
+    }//Foreach recorre tabla 'pedido'
 
-            //si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
-            if ($key['producto']  == $ele['Nombre']) {
-                //for recorre segun la cantidad del producto
-                for ($i=0; $i < $key['cantidad']; $i++) {
-                    $total=$total+$precioPro; 
-                }
-            }
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,14 +57,12 @@
                 	</tr>
                 <?php 
                 	foreach ($tablaPedidoCliente as $key) {//FOreach muestra pedido
-                		if($key['cantidad']>0){
-                        ?>
+                		?>
                 		<tr>
                 			<td><?= $key['producto'] ?></td>
                 			<td><?= $key['cantidad'] ?></td>
                 		</tr>
                 		<?php
-                        }
                 	}//FOreach muestra pedido
                 ?>
                 </table>

@@ -25,5 +25,18 @@
 	</div>
 	<?php
 */
+	
+	updateColors($_POST['bg_color'],$_POST['th_color'],$_POST['header_color'], $_POST['font_color'], $_POST['btn_color'], $_POST['aside_color'], $_POST['aside_btn_color']);
+		$colors=getColors();
+    	foreach($colors as $col){
+	        $_SESSION['bg']=$col['bg_color'];
+	        $_SESSION['header'] = $col['header_color'];
+	        $_SESSION['th'] = $col['table_color'];
+	        $_SESSION['font']=$col['font'];
+	        $_SESSION['btn'] = $col['btn'];
+	        $_SESSION['aside'] = $col['aside'];
+	      	$_SESSION['aside_btn'] = $col['aside_btn'];
+
+	    }
 	header("Location:../Vistas/view_config.php");
  ?>

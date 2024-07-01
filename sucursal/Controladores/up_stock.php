@@ -7,11 +7,11 @@
 <?php
 	//include'header.php';
 	require'../Modelos/consultas.php';
-	$idNombre = filter_input(INPUT_POST, 'nom');
-	$Cantidad = filter_input(INPUT_POST, 'cant');
-    $Sucursal=filter_input(INPUT_POST, 'sucursal');
-    $Nombre=view_tabla("productos WHERE Id_producto=$idNombre");
-	insert_stock($Nombre[0]['Nombre'],$Cantidad,$Sucursal);
+	$Nombre = filter_input(INPUT_POST, 'nom');
+	$un = filter_input(INPUT_POST, 'unidad');
+	$av = filter_input(INPUT_POST, 'aviso');
+
+	insert_stock($Nombre,$un,$av);
 		
 ?>
 

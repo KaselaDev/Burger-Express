@@ -12,9 +12,6 @@
     --aside-color:black;
     --button-color:#003049;
     --aside-button-color:#f77f00;
-    --button-hover-color:#e85d04;
-    --button-font-color:black;
-    --graphic-color:#3d0066;
 }
 
 body {
@@ -100,6 +97,7 @@ flex-direction: column;
 } 
 
 .menu{
+
     display: flex;
     align-items: center;
     gap: 20px;
@@ -183,37 +181,6 @@ td a{
     border-radius: 5px;
 }
 
-/*********************************
-*
-*   ESTILO CONFIGURACION 
-*
-*************************************/
-.form {
-    padding: 20px;
-    width: 60%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-.form img{
-    margin:10px 0;
-}
-.form input[type="file"]{
-    display: none;
-}
-.form input[type="text"] {
-    width: 200px;
-    padding: 5px;
-}
-        
-.boton-file{
-    padding: 10px;
-    margin: 10px 0;
-    color: white;
-    background-color: cadetblue;
-    cursor: pointer;
-}
-.boton-file:hover{
-    opacity: 0.5;
-}
 
 /*********************************
 *
@@ -242,9 +209,8 @@ td a{
 }
 
 .carrito {
-    box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 50%);
+    border-bottom: 1px solid #ccc;
     padding: 10px;
-    background-color: var(--bg-color);
     position: sticky;
     top: 0;
     max-height: 180px;
@@ -398,10 +364,11 @@ button{
 *
 *****************************/
 #menu {
+    position: sticky;
+    top: 0px;
     display: flex;
     color: var(--header-font-color);
     align-items: center;
-    justify-content: space-between;
     background-color: var(--header-color);
     padding: 0;
 }
@@ -414,10 +381,12 @@ button{
     gap:10px;
 }
 #menu ul, #menu li {
+    margin: 0 auto;
     padding: 0;
     list-style: none
 }
 #menu ul {
+    width: 100%;
     text-align: right;
 }
 #menu li {
@@ -494,7 +463,7 @@ button{
     #menu ul.sub-menus {width:100%;position:static;}
     #menu ul.sub-menus a {padding-left:30px;}
     #menu li {display:block;float:none;width:auto;}
-    #menu input, #menu label {position:absolute;top:0;right:0;display:block}
+    #menu input, #menu label {position:absolute;top:0;left:0;display:block}
     #menu input {z-index:4}
     #menu input:checked + label {color:#FFFFFF}
     #menu input:checked + label:before {content:"\00d7"}
@@ -560,8 +529,8 @@ aside{
 }
 #grafico{
    padding-top:20px ;
-   width: 80%;
-   height: 600px;
+   width: 100%;
+   height: 400px;
 }
 #Estadistica{
     width: 50%;
@@ -592,30 +561,135 @@ aside{
 }
 
 .descuento-contenido{
-    text-align: center;
     background: #f0ad4e;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 0px 5px 5px 0px;
     color: white;
-}
-.descuento-contenido ul{
-    text-align: left;
-    list-style: none;
 }
 .descuento-contenido h1{
     font-size: 3rem;
 }
 .descuento-contenido span{
     font-size: .8rem;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .boton-descuento{
     padding: 5px 15px;
     background: #099122;
-    margin: 10px;
 }
 
 #boton-descuento{
     font-size: 2rem;
+}
+/**
+ *  LOGIN 
+ **/
+
+
+.mainbox {
+    margin-top: 50px;
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: #007bff;
+}
+
+.boton button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton button:hover {
+    background-color: #0056b3;
+}
+/*********************************
+*
+*   ESTILO CONFIGURACION 
+*
+*************************************/
+#media{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.form {
+
+    padding: 20px;
+    width: 60%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+#conf{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form img{
+    margin:10px 0;
+}
+.form input[type="file"]{
+    display: none;
+}
+.form input[type="text"] {
+    width: 200px;
+    padding: 5px;
+}
+        
+.boton-file{
+    padding: 10px;
+    margin: 10px 0;
+    color: white;
+    background-color: cadetblue;
+    cursor: pointer;
+}
+.boton-file:hover{
+    opacity: 0.5;
+}
+
+
+#config_buttons{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+.color{
+    margin: 10px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.form input[type="color"] {
+    margin: 10px;
+}
+#sub{
+    margin-bottom: 50px;
 }

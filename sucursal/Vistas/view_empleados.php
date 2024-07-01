@@ -20,7 +20,7 @@
 			<hr>
 		<?php
 			$sucursal=$_SESSION['Cod_sucursal'];
-			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>DNI</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Dirección</th><th>Fecha ing.</th><th>Fecha nac.</th><th>Puesto</th><th>Sueldo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
+			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>Id_empleado</th><th>DNI</th><th>Clave</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Dirección</th><th>Fecha ing.</th><th>Fecha nac.</th><th>Puesto</th><th>Sueldo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
 			if(isset($_GET['mod'])){//SI quire modificar empleado
 				$cod = $_GET['codigo'];
 				//echo($cod);
@@ -67,7 +67,7 @@
 					else{
 						echo"<tr class='white'>";
 					}
-					echo"<td>".$elemento['DNI']."</td><td>".$elemento['Nombre']."</td><td>".$elemento['Apellido']."</td><td>".$elemento['Telefono']."</td><td>".$elemento['Direccion']."</td><td>".$elemento['Ingreso']."</td><td>".$elemento['Fnac']."</td><td>".$elemento['Puesto']."</td><td>".$elemento['Sueldo']."</td>";
+					echo"<td>".$elemento['id_empleado']."</td><td>".$elemento['DNI']."</td><td>".$elemento['Clave']."</td><td>".$elemento['Nombre']."</td><td>".$elemento['Apellido']."</td><td>".$elemento['Telefono']."</td><td>".$elemento['Direccion']."</td><td>".$elemento['Ingreso']."</td><td>".$elemento['Fnac']."</td><td>".$elemento['Puesto']."</td><td>".$elemento['Sueldo']."</td>";
 					echo'<td><a href="view_empleados.php?mod=true&codigo='.$elemento['id_empleado'].'"><span class="material-symbols-outlined" >edit</span></a></td>
 		                                    <td><span onclick="eliminar('.$elemento['id_empleado'].')" class="material-symbols-outlined" style="background-color: #F33627">delete</span></td></tr>';    
 				}

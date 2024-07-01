@@ -16,5 +16,4 @@
 	}
 	$productos=json_encode($productos );
 	insert_descuento($nombre,$descuento,$productos,$fechaD);
-	header("Location:../Vistas/view_productos.php");
  ?>
