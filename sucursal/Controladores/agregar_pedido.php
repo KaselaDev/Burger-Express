@@ -18,7 +18,7 @@
 
 	if ($val) {
 		agregar_pedido($producto,$nombre,'1',$mesa,$idPedido,'tomando..',$sucursal);
-		estado_mesa($sucursal,$mesa,"en proceso"); 
+		estado_mesa($sucursal,$mesa,"en proceso");  
 	}
 
 	$tablaStock=view_tabla("stock WHERE Cod_sucursal='".$sucursal."'");	
