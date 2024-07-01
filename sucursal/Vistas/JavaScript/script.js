@@ -239,62 +239,7 @@ function limpiar_mesa(cod,id,sucursal){
 *       FUNCIONES DESCUENTO
 *
 *********************************/
-function addDescuento(productos) {
-    (async()=>{
-    const { value: nombre } = await Swal.fire({
-      title: "Agregar Descuento",
-      html: `<input type="number" class="swal2-input" id="cant" min="1" max="5" placeholder="Ingrese la Cantidad de productos" style="width:70%;">`,
-      inputAutoFocus: true,
-      showCloseButton: true,
-      confirmButtonColor: "ligthblue",
-      confirmButtonText: "Siguiente",
-      position: 'center',
-    });
-
-    const cantidad=document.getElementById('cant')
-    if (cantidad.value) {
-        console.log(productos)
-        let contenido=`
-            <form method="post" action="../Controladores/agregar_descuento.php" style="font-size:.9rem;">
-                <label for="ing_pre">Nombre del Descuento
-                <p>
-                <input type="text" name="nom" class="swal2-input" min="1" max="100" required></label>
-                <p>
-        `
-        for (var i = 1; i <= cantidad.value; i++) {
-            contenido=contenido+`
-                <label>${i}º Producto
-                <p>
-                <select name="pro" class="swal2-input" style="margin: 10px;">`
-            productos.forEach(({Id_producto,Nombre})=>{
-                contenido=contenido+`<option value="${Id_producto}">${Nombre}</option>`
-            })
-            contenido=contenido+`
-                </select></label>
-                <p>
-            `
-        }
-        contenido=contenido+`
-                <label for="ing_pre">Descuento
-                <p>
-                <input type="number" name="ing_pre" class="swal2-input" min="1" max="100" required></label>
-                <p>
-                <button type="submit" class="buton-carrito-r" style="margin:10px 0;">Agregar</button>
-            </form>
-        `
-
-        Swal.fire({
-          title: "Agregar Descuento",
-          html: contenido,
-          showCloseButton: true,
-          showConfirmButton: false,
-        });
-
-    }
-  })()
-}
-
- function addDescuento2(productos,date) {
+ function addDescuento2(productos,date,idPedido) {
  
     let contenido=`
         <form action="../Controladores/agregar_descuento.php" method="post" style="font-size:.9rem;">

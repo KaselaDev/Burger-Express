@@ -88,7 +88,6 @@ flex-direction: column;
     font-weight: bold;
     border:none;
     border-radius: 5px;
-    width: 250px;
     height: 70px;
     cursor: pointer;
     text-align: center;
@@ -243,8 +242,9 @@ td a{
 }
 
 .carrito {
-    border-bottom: 1px solid #ccc;
+    box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 50%);
     padding: 10px;
+    background-color: var(--bg-color);
     position: sticky;
     top: 0;
     max-height: 180px;
@@ -401,6 +401,7 @@ button{
     display: flex;
     color: var(--header-font-color);
     align-items: center;
+    justify-content: space-between;
     background-color: var(--header-color);
     padding: 0;
 }
@@ -413,12 +414,10 @@ button{
     gap:10px;
 }
 #menu ul, #menu li {
-    margin: 0 auto;
     padding: 0;
     list-style: none
 }
 #menu ul {
-    width: 100%;
     text-align: right;
 }
 #menu li {
@@ -495,7 +494,7 @@ button{
     #menu ul.sub-menus {width:100%;position:static;}
     #menu ul.sub-menus a {padding-left:30px;}
     #menu li {display:block;float:none;width:auto;}
-    #menu input, #menu label {position:absolute;top:0;left:0;display:block}
+    #menu input, #menu label {position:absolute;top:0;right:0;display:block}
     #menu input {z-index:4}
     #menu input:checked + label {color:#FFFFFF}
     #menu input:checked + label:before {content:"\00d7"}
@@ -593,22 +592,28 @@ aside{
 }
 
 .descuento-contenido{
+    text-align: center;
     background: #f0ad4e;
     padding: 10px;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 5px;
     color: white;
+}
+.descuento-contenido ul{
+    text-align: left;
+    list-style: none;
 }
 .descuento-contenido h1{
     font-size: 3rem;
 }
 .descuento-contenido span{
     font-size: .8rem;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 .boton-descuento{
     padding: 5px 15px;
     background: #099122;
+    margin: 10px;
 }
 
 #boton-descuento{

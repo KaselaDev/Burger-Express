@@ -13,7 +13,7 @@
 	<section>
 		<h2 style="border-bottom: 1px solid black">Sucursales</h2>
 		<?php
-			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>Cod. Sucursal</th><th>Dirección</th><th>Mesas</th><th>Fecha de alta</th><th>Empleado a cargo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
+			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>Dirección</th><th>Mesas</th><th>Fecha de alta</th><th>Empleado a cargo</th><th>Modificar</th><th>Eliminar</th></thead><tbody>";
 			if(isset($_GET['mod'])){#SI DESEA MODIFICAR
 				$cod = $_GET['codigo'];
 				$datos=getSucursales("WHERE `Cod_sucursal` = '$cod'");
@@ -27,7 +27,7 @@
 				}
 				echo"<script>modificar(".$a.")</script>";		
 			}
-				$datos=getSucursales();
+				$datos=getSucursales2();
 				if(empty($datos)){ #SI NO HAY SUCURSALES CARGADAS
 					echo'<tr><td><a><span class="material-symbols-outlined" onclick="add()">add</span></a></td></tr>';
 					echo'<script type="text/javascript">
@@ -54,7 +54,7 @@
 						echo"<tr class='white'>";
 
 					}
-					echo"<td>".$elemento['Cod_sucursal']."</td><td>".$elemento['Direccion']."</td><td>".$elemento['Capacidad']."</td><td>".$elemento['Fecha']."</td><td>".$elemento['Cod_supervisor']."</td>";
+					echo"<td>".$elemento['Direccion']."</td><td>".$elemento['Capacidad']."</td><td>".$elemento['Fecha']."</td><td>".$elemento['Nombre']." ".$elemento['Apellido']."</td>";
 					echo'<td><a href="view_sucursales.php?mod=true&codigo='.$elemento['Cod_sucursal'].'"><span class="material-symbols-outlined" >edit</span></a></td>
 		                <td><span onclick="eliminar('.$elemento['Cod_sucursal'].')" class="material-symbols-outlined" style="background-color: #F33627">delete</span></td></tr>';
 		            

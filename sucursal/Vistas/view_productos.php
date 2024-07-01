@@ -31,15 +31,42 @@
 			}
 			echo '<tr><td><a onclick="addProducto()" style="cursor:pointer"><span class="material-symbols-outlined" style="background:green;">add</span></a></td></tr>';
 			echo "</table>";
-			$tablaProductos=json_encode($datos);
+			$tablaProductosJS=json_encode($datos);
 			$fechaD=date('Y-m-d');
 		 ?>	
 		 <h2 style="border-bottom: 1px solid;">Descuentos</h2>
-		 <div class="lista-descuentos">
-		 	<button class="boton-descuento" onclick='addDescuento2(<?= $tablaProductos ?>,"<?= $fechaD ?>")'>
-		 		<span class="material-symbols-outlined" id="boton-descuento">new_label</span>
-		 	</button>
+		<button class="boton-descuento" onclick='addDescuento2(<?= $tablaProductosJS ?>,"<?= $fechaD ?>")'>
+		 	<span class="material-symbols-outlined" id="boton-descuento">new_label</span>
+		</button>
+		<div class="lista-descuentos">
 		 	
+		 	<?php
+				$tablaPromos=view_tabla('promociones');
+
+				foreach ($tablaPromos as $ele) {
+					$productos=json_decode($ele['productos']);
+					?>
+					<div class="descuento-contenido">
+						<h2><?= $ele['nombre'] ?></h2>
+						<ul>
+						<?php
+							foreach ($productos as $value) {
+								foreach ($datos as $p) {
+									if($p['Id_producto']==$value){
+										echo "<li>".$p['Nombre']."</li>";
+									}
+								}
+							}
+						?>
+						</ul>
+						<h1><?= $ele['descuento'] ?>%</h1>
+						<span>DE DESCUENTO</span>
+						<h6>Hasta <?= $ele['fechaDuracion'] ?></h6>
+					</div>	
+					
+					<?php
+				}
+			?>
 		 </div>
 	</section>
 </body>

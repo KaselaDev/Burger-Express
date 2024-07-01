@@ -4,14 +4,7 @@ include 'header.php';
 date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 $fecha = date("Y-m-d");
 $set = getCaja($fecha);
-if(empty($set)){
-    if(isset($_POST['caja'])){
-            postOpen($_POST['caja'],"yo");
-    } 
-    else{
-        echo'<script type="text/javascript" src="JavaScript/index.js"></script>';
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

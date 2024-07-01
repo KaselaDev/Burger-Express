@@ -27,3 +27,18 @@
 	</center>
 </body>
 </html>
+<?php 
+	require 'Modelos/conexion.php';
+
+	$consulta=$conexion->prepare("SELECT * FROM promociones");
+	$consulta->execute();
+	$tablaPro=$consulta->fetchAll(PDO::FETCH_ASSOC);
+ 	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
+ 	foreach ($tablaPro as $key) {
+ 		//Averigua si el descuento expiro, si es asi los elimina
+ 		if ($key['fechaDuracion']<date("Y-m-d")) {
+ 			$consulta=$conexion->prepare("DELETE FROM promociones WHERE id_promo='".$key['id_promo']."'");
+ 			$consulta->execute();
+ 		}
+ 	}
+ ?>

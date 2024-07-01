@@ -9,38 +9,62 @@
     $tablaProductos=view_tabla2("productos");
     $tablaStock=view_tabla2("stock WHERE Cod_sucursal='".$sucursal."'");
     $tablaPedido=view_tabla2("pedido WHERE Cod_sucursal='".$sucursal."'");
+    $tablaPromo=view_tabla2("promociones");
    
-    if ($accion == "nuevo") {//Si es un nuevo pedido
-       foreach ($tablaPedido as $key) {//For each obtiene el idPedido
+    //Si es un nuevo pedido
+    if ($accion == "nuevo") {
+        //For each obtiene el idPedido
+       foreach ($tablaPedido as $key) {
            $idPedido=$key['idPedido'];
-       }//For each obtiene el idPedido
+       }
        $idPedido++;
-    }//Si es un nuevo pedido
-    elseif ($accion == "ver") {//si el pedido esta en proceso 
-        foreach ($tablaPedido as $key) {//foreach recorre tabla 'pedido' y obtine el cliente y el idPedido
-            if ($key['mesa'] == $mesa) {//si para buscar las mesas
+    }
+    //si el pedido esta en proceso 
+    elseif ($accion == "ver") {
+        //foreach recorre tabla 'pedido' y obtine el cliente y el idPedido
+        foreach ($tablaPedido as $key) {
+            //si para buscar las mesas
+            if ($key['mesa'] == $mesa) {
                 $nombre=$key['cliente'];
                 $idPedido=$key['idPedido'];
-            }//si para buscar las mesas
-        }//foreach recorre tabla 'pedido' y obtine el cliente y el idPedido
-    }//si el pedido esta en proceso 
+            }
+        }
+    }
 
     $tablaPedidoCliente=search_pedido($nombre,$mesa,$idPedido);
     $cantPedido=0;
     $total=0;
-    foreach ($tablaPedidoCliente as $key) {//Foreach recorre tabla 'pedido'
-        if ($idPedido == $key['idPedido']) {//Si el idPedido coincide
-            $cantPedido=$cantPedido+$key['cantidad'];
-            foreach ($tablaProductos as $ele) {//Foreach recorre tabla 'producto'
-                if ($key['producto']  == $ele['Nombre']) {//si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
-                    for ($i=0; $i < $key['cantidad']; $i++) {//for recorre segun la cantidad del producto
-                       $total=$total+$ele['Costo']; 
-                    }//for recorre segun la cantidad del producto
-                }//si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
-            }//Foreach recorre tabla 'producto'
-        }//Si el idPedido coincide
-    }//Foreach recorre tabla 'pedido'
 
+    //Foreach recorre tabla 'pedido'
+    foreach ($tablaPedidoCliente as $key) {
+        //Si el idPedido coincide
+        $cantPedido=$cantPedido+$key['cantidad'];
+        //Foreach recorre tabla 'producto'
+        foreach ($tablaProductos as $ele) { 
+            $precioPro=$ele['Costo'];
+            foreach ($tablaPromo as $value) {
+                $pro=json_decode($value['productos']);
+                for ($i=0; $i < count($pro); $i++) { 
+                    //Si el producto tiene descuento los descuento
+                    if ($pro[$i] == $ele['Id_producto']) {
+                        $descuento="0.".$value['descuento'];
+                        $preResta=$ele['Costo']*$descuento;
+                        $precioPro=$precioPro-$preResta;
+                    }
+                }
+            } 
+
+            //si el producto de tabla 'producto' es IGUAL a producto 'pedido' calcule el total
+            if ($key['producto']  == $ele['Nombre']) {
+                //for recorre segun la cantidad del producto
+                for ($i=0; $i < $key['cantidad']; $i++) {
+                    $total=$total+$precioPro; 
+                }
+            }
+        }
+    }
+    //echo $total-$totalDes;
+    //echo "<br>".$totalDes2; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +84,7 @@
                     <h2><span class="material-symbols-outlined" style="font-size: 1.7rem;">menu_book</span>Pedido</h2>
                     <p>Cliente: <b><?= $nombre ?></b></p>
                     <p>Cantidad Productos <b><?= $cantPedido ?></b></p>
-                    <p>Total: <b>$<?= $total ?></b></p>
+                    <p >Total: <b>$<?= $total ?></b> </p>
                     <button class="buton-carrito-r" onclick="realizar_pedido(<?= $mesa ?>,<?= $idPedido ?>,<?= $sucursal ?> )">   
                         <span class="material-symbols-outlined"  id="buton-ico">check</span>
                         <span class="buton-text">Realizar Pedido</span>
@@ -74,28 +98,51 @@
             <div class="pedido-menu">
                 <!-- PRODUCTOS DISPONIBLES -->
                 <div class="pedido-caja">
-                    <h3><span class="material-symbols-outlined">restaurant_menu</span>Productos Disponibles</h3>
+                    <h3>
+                        <span class="material-symbols-outlined">restaurant_menu</span>
+                        Productos Disponibles
+                    </h3>
                     <table id="table" border="1">
                         <tr>
                             <th>Nombre</th>
-                            <th>Descripciòn</th>
+                            <th>Descripción</th>
                             <th>Precio</th>
                             <th>Agregar</th>
                         </tr>
                     <?php
                         foreach ($tablaProductos as $key) {//Foreach recorre productos de base
-                            foreach ($tablaStock as $ele) {//Foreach recorre tabla stock
-                                if ($key['Nombre'] == $ele['Nombre'] && $ele['Cantidad']>0) {//SI el producto esta habilitado en la sucursal
+                            $precioPro=$key['Costo'];
+                            $val=true;
+                            foreach ($tablaPromo as $ele) {
+                                $pro=json_decode($ele['productos']);
+                                for ($i=0; $i < count($pro); $i++) { 
+                                    //Si el producto tiene descuento los descuento
+                                    if ($pro[$i] == $key['Id_producto']) {
+                                        $descuento="0.".$ele['descuento'];
+                                        $preResta=$key['Costo']*$descuento;
+                                        $precioPro=$precioPro-$preResta;
+                                        $val=false;
+                                    }
+                                }
+                            }  
                             ?>
                             <tr>
                                 <td><?= $key['Nombre'] ?></td>
                                 <td><?= $key['Descripcion'] ?></td>
-                                <td>$<?= $key['Costo'] ?></td>
+                                <td>
+                                    <?php
+                                        if(!$val){ 
+                                            echo "<span style='text-decoration:line-through;color:red'>$".$key['Costo']."</span> $".$precioPro;
+                                        } 
+                                        else{
+                                            echo "$".$precioPro;
+                                        }
+                                    ?>
+                                    
+                                </td>
                                 <td><button class="buton-agregar" onclick="addPedido('<?= $key['Nombre'] ?>',<?= $mesa ?>,<?= $idPedido ?>,'<?= $nombre ?>',<?= $sucursal ?>)"><span class="material-symbols-outlined">add_circle</span></button></td>
                             </tr>                           
                             <?php        
-                                }//SI el producto esta habilitado en la sucursal
-                            }//Foreach recorre tabla stock
                         }//Foreach recorre productos de base
                     ?>
                     </table>
@@ -135,6 +182,7 @@
                             }//Foreaach recoorre tabla 'pedidos' 
                             ?>
                             </table>
+                            
                             <?php
                         }//SI ecuentra el pedido meustre el 'pedido'
                         else{
@@ -145,6 +193,5 @@
             </div>
         </div>
     </section>
-    
 </body>
 </html>
