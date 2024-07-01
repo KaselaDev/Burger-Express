@@ -1,9 +1,8 @@
 <?php
 	require'../Modelos/consultas.php';
 	$id = filter_input(INPUT_POST, 'ubi');
-	$Nombre = filter_input(INPUT_POST, 'nuev_nombre');
-	$Cantidad = filter_input(INPUT_POST, 'nuev_cantidad');
+	$Cantidad = filter_input(INPUT_POST, 'cantidad');
 	$Sucursal=filter_input(INPUT_POST, 'sucursal');
-	update_stock($id,$Nombre,$Cantidad);
+	update_stock($id,$Cantidad,$Sucursal);
 	header('location:../Vistas/infoStock.php');
 ?>

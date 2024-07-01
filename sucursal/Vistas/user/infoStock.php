@@ -6,70 +6,45 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link rel="stylesheet" href="../styles/style.css">
     <title>Stock</title>
     <style>
         .content-stock,.grafico{
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
             margin: 10px 0;
+            margin-left: 100px;
             padding: 20px;
-            width: 100%;
+            width: 85%;
         }
     </style>
 </head>
 <body>
     <?php 
         include 'header_user.php'; 
-        //$tablaStock=view_tabla("stock WHERE Cod_sucursal='$_SESSION['sucursal']'");
-     ?>
+        $sucursal=$_SESSION['Cod_sucursal'];
+        $tablaStock=view_tabla2("stock WHERE Cod_sucursal='".$sucursal."'");
+    ?>
     <section>
         <?php 
-            $sucursal=$_SESSION['Cod_sucursal'];
-            $tablaSucursales=view_tabla2('sucursales');
-            echo "<h2>Stock de Sucursal ";
-                foreach ($tablaSucursales as $key) {
-                    if ($key['Cod_sucursal'] == $sucursal ) {//Si para seleccionar la sucursal en la que seleciono
-                        echo $key['Direccion']."</h2>";    
-                    }//Si para seleccionar la sucursal en la que seleciono
+            $bajoStock=[];
+            foreach($tablaStock as $db){
+                if($db['Cantidad']<100) { 
+                    array_push($bajoStock, $db['Nombre']);
                 }
-            $tablaStock=view_tabla2("stock WHERE Cod_sucursal='".$sucursal."'");
-         ?>
-         <!---------------------------------------------- 
+            }//SI el stock es bajo gurader los nombres
+           
             
-                TABLA STOCK 
-
-        ------------------------------------------------>
-        <div class="content-stock">
-            <h2>Tabla de Stock</h2>
-            <table id="table" border="1" width="100%">
-                <tr>
-                    <th>###</th>
-                    <th>Nombre</th>
-                    <th>Cantidad(Unidad)</th>
-                </tr>
-                <?php
-                    $n=1;
-                    $bajoStock=[];
-                    foreach($tablaStock as $db){
-                        if($db['Cantidad']<5) { 
-                            array_push($bajoStock, $db['Nombre']);
-                        }//SI el stock es bajo gurader los nombres
-                        $color = ($n%2)!=0 ? ' ' : 'class="gray"';
-                        echo '<tr '.$color.'>
-                            <td>'.$n.'</td> 
-                            <td>'.$db['Nombre'].'</td> 
-                            <td>'.$db['Cantidad'].'</td>
-                        </tr>';
-                        $n++;
-                    }
-                ?>  
-            </table>
-        </div> 
+         ?>
+        
+        
          <!---------------------------------------------- 
             
                 GRAFICO STOCK 
 
         ------------------------------------------------>
+       
         <div class="grafico">
             <h2>Grafico de Stock</h2>
             <div style="width: 70%;"><canvas id="GraficoStock" style="margin: 10px"></canvas></div>
@@ -89,6 +64,41 @@
             <script>alertStock(<?= $bajoStock ?>)</script>
             <script>graficar(<?=$dataStock?>,<?=$nombreStock?>,"Cantidad","GraficoStock")</script>
         </div>
+         <!---------------------------------------------- 
+            
+                TABLA STOCK 
+
+        ------------------------------------------------>
+        <div class="content-stock">
+            <h2>Tabla de Stock</h2>
+            <table id="table" border="1" width="100%">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Agregar</th>
+                </tr>
+                <?php
+                    $n=1;
+                    $bajoStock=[];
+                    foreach($tablaStock as $db){
+                        if($db['Cantidad']<$db['aviso']) { 
+                            array_push($bajoStock, $db['Nombre']);
+                        }//SI el stock es bajo gurader los nombres
+                        $color = ($n%2)!=0 ? ' ' : 'class="gray"';
+                        echo '<tr '.$color.'>
+                            <td>'.$db['Nombre'].'</td> 
+                            <td>'.$db['Cantidad'].' '.$db['unidad_medicion'].'</td>
+                            <td>
+                        <a style="cursor: pointer;" onclick="modifyStock('.$db['Cod_producto'].','.$db['Cod_sucursal'].')">
+                            <span class="material-symbols-outlined"  style="background:green;">add</span>
+                        </a>
+                    </td>
+                        </tr>';
+                        $n++;
+                    }
+                ?>  
+            </table>
+        </div> 
     </section>
 </body>
 </html>

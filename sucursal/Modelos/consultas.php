@@ -4,9 +4,26 @@
 *	AGREGADO CAJA
 *
 ********************************************* */
-define("URL", "../Modelos/conexion.php");
+define("URL", "C:/xampp/htdocs/sucursalV10/sucursaltizi/sucursal-main/sucursal/Modelos/conexion.php");
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); 
+}
+function getIngredientes($name){
+		require '../Modelos/conexion.php';
+		$change=$conexion->prepare("SELECT ingredientes FROM productos WHERE Nombre LIKE '%".$name."%'");
+	    $change->execute();
+	    return $change->fetchAll(PDO::FETCH_ASSOC);
+	}
+function getColors(){
+	require 'conexion.php';
+		$consulta=$conexion->prepare("SELECT * FROM infosucursal");
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
+}
+function updateColors($bg, $th, $head, $font, $btn, $aside, $aside_btn){
+	require '../Modelos/conexion.php';
+	$change=$conexion->prepare("UPDATE infosucursal SET bg_color='$bg', table_color='$th', header_color='$head', font='$font', btn='$btn', aside= '$aside', aside_btn= '$aside_btn'");
+    $change->execute();
 }
 function cerrarCaja(){
 		require '../Modelos/conexion.php';
@@ -146,14 +163,7 @@ function postOpen($importe,$encargado){
 		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 		return $datos;
 	}
-	
-	function getSucursales2(){
-		require'../Modelos/conexion.php';
-		$consulta = $conexion->prepare("SELECT sucursales.Direccion,sucursales.Capacidad,sucursales.Fecha,sucursales.Cod_sucursal,empleados.Apellido,empleados.Nombre FROM sucursales JOIN empleados ON sucursales.Cod_sucursal=empleados.Cod_sucursal");
-		$consulta->execute();
-		$datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		return $datos;
-	}
+
 	function updateSucursal($dire,$capa,$co,$fecha,$cod){
 		require'../Modelos/conexion.php';
 		$change=$conexion->prepare("UPDATE sucursales SET Direccion=:dir, Capacidad=:cap, Cod_supervisor=:cod_s, Fecha=:fec WHERE sucursales.Cod_sucursal= :code ");
@@ -180,6 +190,7 @@ function postOpen($importe,$encargado){
 			}
 			insert_mesa($cap,$cod);
 		}//SI se agrego la sucursal agrege las mesas
+		return $insert;
 	}
 
 	function getSucursalByDireccion($dir){
@@ -375,8 +386,9 @@ function postOpen($importe,$encargado){
 		date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 
         //echo $nump_id;
-        $fecha=date("Y-m-d H:i:s");
-        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`,`Cod_sucursal`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est, :suc);");
+        $fecha=date("Y-m-d");
+		$hora=date("H:i:s");
+        $consulta=$conexion-> prepare("INSERT INTO `pedido` (`Cod_pedido`, `idPedido`, `producto`, `cantidad`, `fecha`, `cliente`, `mesa`, `estado`,`Cod_sucursal`,`hora`) VALUES (:cod, :id, :pro, :cant, :fec, :nom, :mesa, :est, :suc, :hor);");
         $consulta->bindParam(':mesa',$mesa);
 		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
 		$consulta->bindParam(':fec',$fecha);
@@ -386,6 +398,7 @@ function postOpen($importe,$encargado){
 	    $consulta->bindParam(':est',$estado);
 	    $consulta->bindParam(':cod',$nump_id);
 	    $consulta->bindParam(':suc',$sucursal);
+		$consulta->bindParam(':hor',$hora);
 	    return $consulta->execute();
 	}
 
@@ -495,40 +508,64 @@ function postOpen($importe,$encargado){
 	*	FUNCIONES CRUD STOCK
 	*
 	**********************************/
-	function insert_stock($nombre,$cant,$sucursal){
+	function getIdSucursales(){
 		require'../Modelos/conexion.php';
-		$consulta = $conexion->prepare("SELECT * FROM stock");
+		$consulta = $conexion->prepare("SELECT Cod_sucursal FROM sucursales");
 		$consulta->execute();
-        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        $nump_id=0;
-        foreach($datos as $elemento){
-        	if ($elemento['Cod_producto']>$nump_id) {
-        		$nump_id = $elemento['Cod_producto'];
-        	}
-        }
-        $nump_id++;
-        //echo $nump_id;
-        $consulta=$conexion-> prepare("INSERT INTO `stock` (`Cod_producto`, `Nombre`, `Cantidad`, `Cod_sucursal`) VALUES (:cod, :nom, :cant,:suc);");
-		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
-	    $consulta->bindParam(':cant',$cant);
-	    $consulta->bindParam(':cod',$nump_id);
-	    $consulta->bindParam(':suc',$sucursal);
-	    $consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	function getProds(){
+		require'../Modelos/conexion.php';
+		$consulta = $conexion->prepare("SELECT * FROM stock WHERE Cod_sucursal=2");
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_ASSOC);
+	}
+	function newSucursalStock($id){
+		require'../Modelos/conexion.php';
+		$cant = getProds();
+        foreach($cant as $prod){
+        	$cod = $prod['Cod_producto'];
+        	$nom= $prod['Nombre'];
+        	$un = $prod['unidad_medicion'];
+        	$av = $prod['aviso'];
+        	var_dump($id);
+ 			$consulta=$conexion->prepare("INSERT INTO `stock` (`Cod_producto`, `Nombre`, `Cantidad`, `Cod_sucursal`, `unidad_medicion`, `aviso`) VALUES ('$cod', '$nom', '--', '$id', '$un', '$av')");        	
+	    	$consulta->execute();
+	    }
+	}
+	function insert_stock($nombre, $un, $av){
+		require'../Modelos/conexion.php';
+		$cant = getProds();
+		$cant = count($cant)+1;
+		$sucursales = getIdSucursales();
+        foreach($sucursales as $elemento){
+        	$suc = $elemento['Cod_sucursal'];
+ 			$consulta=$conexion->prepare("INSERT INTO `stock` (`Cod_producto`, `Nombre`, `Cantidad`,`Cod_sucursal`, `unidad_medicion`, `aviso`) VALUES ('$cant', '$nombre', '--', '$suc', '$un', '$av')");        	
+	    	$consulta->execute();
+	    }
+	}
 	function delete_stock($cod){
 		require'../Modelos/conexion.php';
 		$consulta=$conexion->prepare("DELETE FROM stock WHERE Cod_producto=:cod");
 	    $consulta->bindParam(":cod",$cod);
 	    $consulta->execute();
 	}
-
-	function update_stock($cod,$nombre,$cant){
+	function desc_stock($name){
 		require'../Modelos/conexion.php';
-		$consulta=$conexion->prepare(" UPDATE stock SET nombre=:nom, cantidad=:cant WHERE stock.Cod_producto=:cod;");
+		$consulta=$conexion->prepare(" UPDATE stock SET cantidad=cantidad-1 WHERE Nombre=:nam AND Cod_sucursal=:sucursal;");
+	    $consulta->bindParam(':nam',$name);
+	    $suc = $_SESSION['Cod_sucursal'];
+	   	$consulta->bindParam(':sucursal',$suc);
+	    $consulta->execute();
+	}
+
+	function update_stock($cod,$cant,$suc){
+		require'../Modelos/conexion.php';
+		$consulta=$conexion->prepare(" UPDATE stock SET cantidad=cantidad+:cant WHERE stock.Cod_producto=:cod and Cod_sucursal=:sucursal;");
 	    $consulta->bindParam(':cant',$cant);
-	    $consulta->bindParam(':nom',$nombre);
 	    $consulta->bindParam(':cod',$cod);
+	   	$consulta->bindParam(':sucursal',$suc);
 	    $consulta->execute();
 	}
 
@@ -552,7 +589,7 @@ function postOpen($importe,$encargado){
         }
         $nump_id++;
         //echo $nump_id;
-        $consulta=$conexion-> prepare("INSERT INTO `promociones` (`id_promo`, `nombre`, `productos`, `descuento`,`fechaDuracion`) VALUES (:cod, :nom, :pro,:de,:fec);");
+        $consulta=$conexion-> prepare("INSERT INTO `promociones` (`id_promo`, `nombre`, `productos`, `precio`,`fechaDuracion`) VALUES (:cod, :nom, :pro,:de,:fec);");
 		$consulta->bindParam(':nom',$nombre);//el bindParam vincula la variable 'nroHistoria' con otra nueva(:nroHist)
 	    $consulta->bindParam(':pro',$productos);
 	    $consulta->bindParam(':cod',$nump_id);
@@ -560,11 +597,4 @@ function postOpen($importe,$encargado){
 		$consulta->bindParam(':fec',$fecha);
 	    $consulta->execute();
 	 }
-
-	function delete_descuentoPedido($id){
-		require URL;
-		$consulta=$conexion->prepare("DELETE FROM pedido_promociones WHERE id=:id");
-	    $consulta->bindParam(":id",$id);
-	    $consulta->execute();
-	}
 ?>

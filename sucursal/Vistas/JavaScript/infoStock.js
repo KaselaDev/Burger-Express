@@ -29,34 +29,32 @@ function colorTransp(colores,opac){
     return colores.map(color => `${color+opac}`)
 }
 
-function add(cod,productos){
-    console.log(productos)
-    let contenido=` `;
-    let titulo="Limite de productos alcanzado";
-    if (productos.length>0) {
-        contenido= `
+function add(){
+   
+    let contenido= `
         <form action='../Controladores/up_stock.php' method="post">
             Nombre:
-             <p>
-             <select name="nom" class="swal2-input" required style="font-size:1.2rem">
-        `
-        productos.forEach( ({Id_producto, Nombre}) =>{
-            contenido=contenido+`
-                <option value=${Id_producto}>${Nombre}</option>
-            `
-        })
-        contenido=contenido+`
-             </select>
             <p>
-            Cantidad:
+            <input type="text" name="nom" min="1" class="swal2-input" required>
             <p>
-             <input type="number" name="cant" min="1" class="swal2-input" required>
+            Unidad de medicion:
             <p>
-            <input type="hidden" name="sucursal" value="${cod}">
+            <select id='newProd' name="unidad">
+                <option value="kg">Kg</option>
+                <option value="unidades">Unidades</option>
+                <option value="bolsas">Bolsas</option>
+                <option value="cajas">Cajas</option>
+            </select>
+            <p>
+            Dar aviso a cierta cantidad:
+            <p>
+            <input type="number" name="aviso" placeholder="ingrese una cantidad" min="1" class="swal2-input" required>
+            <p>
+            <p>
+            <p>
             <button type="submit" class="buton-carrito-r" style="margin-top:10px">Ingresar</button>
             </form>`;  
         titulo="Nuevo producto"
-    }
     Swal.fire({
         title: titulo,
         html: contenido,
@@ -66,7 +64,7 @@ function add(cod,productos){
     });
 }
 
-function deleteS(cod,suc){
+function deleteS(cod){
     Swal.fire({
         title: "Realmente desea eliminar este Producto?",
         text: "",
@@ -74,27 +72,25 @@ function deleteS(cod,suc){
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Si, Eliminarla!"
+        confirmButtonText: "Si, Eliminarlo!"
     }).then((result) => {
     if (result.isConfirmed) {
-        window.location.href = `../Controladores/delete_stock.php?codigo=${cod}&sucursal=${suc}`
+        window.location.href = `../Controladores/delete_stock.php?codigo=${cod}`
 
         }
     });
 }
 
-function modifyStock(id,nombre,cantidad,sucursal) {
-    console.log(nombre,cantidad)
+function modifyStock(id,sucursal) {
     const contenido=`
-    <form action="../Controladores/modify_stock.php" method="post" style="display:inline-grid">
+    <form action="../../Controladores/modify_stock.php" method="post" style="display:inline-grid">
         <input type="hidden" name="ubi" value="${id}">
         <input type="hidden" name="sucursal" value="${sucursal}">
-        <span>Nombre<p><input type="text" name="nuev_nombre" value="${nombre}" class="swal2-input" readonly><p></span>
-        <span>Cantidad<p><input type="number" name="nuev_cantidad" min="1" value="${cantidad}" class="swal2-input" required><p></span>
+        <span>Cantidad<p><input type="number" name="cantidad" min="1" placeholder="ingresaron X cantidad" class="swal2-input" required><p></span>
         <button type="submit" class="buton-carrito-r" style="margin:10px 0;">Editar</button>
     </form>`
     Swal.fire({
-        title:"Editar Producto",
+        title:"Ingreso de mercaderia",
         html: contenido,
         showConfirmButton: false,
         showCloseButton: true,
@@ -120,7 +116,7 @@ function alertStock(contenido) {
 
 function graficar(dataStock,nombreStock,contLabel,id) {
     bcolor = colorHEX(nombreStock.length);//COlor del border
-    color = colorTransp(bcolor,20);//Color transparente
+    color = colorTransp(bcolor,10);//Color transparente
 
     const ctx = document.getElementById(id);
     new Chart(ctx, {

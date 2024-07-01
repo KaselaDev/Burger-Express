@@ -10,6 +10,11 @@
 	$direccion = filter_input(INPUT_POST, 'dir');
 	$capacidad = filter_input(INPUT_POST, 'cap');
 	postSucursal($direccion,$capacidad);
+	$datos = getIdSucursales();
+	foreach($datos as $ele){
+		$id = $ele['Cod_sucursal'];
+	}
+	newSucursalStock($id);
 ?>
 
 <script type="text/javascript">

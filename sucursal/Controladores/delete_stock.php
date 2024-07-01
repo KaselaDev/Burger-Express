@@ -5,7 +5,6 @@
 	//include'header.php';
 	require'../Modelos/consultas.php';
 	$cod=filter_input(INPUT_GET, 'codigo');
-	$Sucursal=filter_input(INPUT_GET, 'sucursal');
 	if(isset($cod)){
 		delete_stock($cod);
 	}else{

@@ -6,6 +6,18 @@
 <?php
     session_start();
     require "../Modelos/consultas.php";
+
+    $colors=getColors();
+    foreach($colors as $col){
+        $_SESSION['bg']=$col['bg_color'];
+        $_SESSION['header'] = $col['header_color'];
+        $_SESSION['th'] = $col['table_color'];
+        $_SESSION['font']=$col['font'];
+        $_SESSION['btn'] = $col['btn'];
+        $_SESSION['aside'] = $col['aside'];
+        $_SESSION['aside_btn']=$col['aside_btn'];
+    }
+
     $DNI = filter_input(INPUT_POST,'DNI');
     $Clave = filter_input(INPUT_POST,'Clave');
     $datos = userExists($DNI,$Clave);
