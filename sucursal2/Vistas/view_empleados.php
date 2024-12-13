@@ -65,7 +65,7 @@
 						echo"<tr class='gray'>";
 					}
 					else{
-						echo"<tr class='white'>";
+						echo"<tr style='background-color: gold;'>";
 					}
 					echo"<td>".$elemento['id_empleado']."</td><td>".$elemento['DNI']."</td><td>".$elemento['Clave']."</td><td>".$elemento['Nombre']."</td><td>".$elemento['Apellido']."</td><td>".$elemento['Telefono']."</td><td>".$elemento['Direccion']."</td><td>".$elemento['Ingreso']."</td><td>".$elemento['Fnac']."</td><td>".$elemento['Puesto']."</td><td>".$elemento['Sueldo']."</td>";
 					echo'<td><a href="view_empleados.php?mod=true&codigo='.$elemento['id_empleado'].'"><span class="material-symbols-outlined" >edit</span></a></td>

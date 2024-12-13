@@ -4,14 +4,14 @@
 }
 
 :root{
-    --header-color:#970D0D;
-    --bg-color:#eae2b7;
-    --table-th-color:#003049;
+    --header-color:#466995;
+    --bg-color:#F58F29;
+    --table-th-color:#7D4600;
     --header-font-color:white;
     --font-color:black;
     --aside-color:black;
-    --button-color:#003049;
-    --aside-button-color:#f77f00;
+    --button-color:#A4B0F5;
+    --aside-button-color:#4464AD;
 }
 
 body {

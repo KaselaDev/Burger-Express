@@ -20,7 +20,7 @@
 			
 			foreach($datos as $key){
 				if ($key['Id_producto']%2 != 0) {
-					echo"<tr>";
+					echo"<tr style='background-color: gold;'>";
 				}
 				else{
 					echo"<tr class='gray'>";
@@ -39,8 +39,38 @@
 		 	<button class="boton-descuento" onclick='addDescuento2(<?= $tablaProductos ?>,"<?= $fechaD ?>")'>
 		 		<span class="material-symbols-outlined" id="boton-descuento">new_label</span>
 		 	</button>
-		 	
 		 </div>
+		 <br>
+		 <?php
+			$datosDescuentos=view_tabla("promociones");
+			echo"<table id='table'border='1' style='margin:10px ;width:90%'><thead><th>Id Productos</th><th>Nombre</th><th>Productos</th><th>Tiempo duracion</th><th>Descuento</th></thead>";
+			foreach($datosDescuentos as $key){
+				if ($key['id_promo']%2 != 0) {
+					echo"<tr style='background-color: gold;'>";
+				}
+				else{
+					echo"<tr class='gray'>";
+				}
+
+				$ids = json_decode($key['productos'], true);
+
+				$nombres = [];
+				
+				foreach ($datos as $producto) {
+					if (in_array($producto['Id_producto'], $ids)) {
+						$nombres[] = $producto['Nombre'];
+					}
+				}
+
+				$html = "<ul>\n";
+				foreach ($nombres as $nombre) {
+					$html .= "<li>" . htmlspecialchars($nombre) . "</li>\n";
+				}
+				$html .= "</ul>";
+
+				echo "<td>".$key['id_promo']."</td><td>".$key['nombre']."</td><td>$html</td><td>".$key['fechaDuracion']."</td><td>".$key['descuento']."%</td> ";
+			}
+		 ?>
 	</section>
 </body>
 </html>

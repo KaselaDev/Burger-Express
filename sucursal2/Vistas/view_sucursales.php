@@ -51,7 +51,7 @@
 						echo"<tr class='gray'>";
 					}
 					else{
-						echo"<tr class='white'>";
+						echo"<tr style='background-color: gold;'>";
 
 					}
 					echo"<td>".$elemento['Cod_sucursal']."</td><td>".$elemento['Direccion']."</td><td>".$elemento['Capacidad']."</td><td>".$elemento['Fecha']."</td><td>".$elemento['Cod_supervisor']."</td>";

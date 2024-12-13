@@ -33,6 +33,6 @@
             $_SESSION['Cod_sucursal'] = $sucursal['Cod_sucursal'];
         }
         $_SESSION['sucursal'] = $_POST['sucursal'];
-        header("location:index.php");
+        header("location:select.php");
     }
 ?>

@@ -6,7 +6,7 @@
 <?php
     session_start();
     require "../Modelos/consultas.php";
-
+    
     $colors=getColors();
     foreach($colors as $col){
         $_SESSION['bg']=$col['bg_color'];

@@ -7,9 +7,11 @@
 <?php
 	//include'header.php';
 	require'../Modelos/consultas.php';
+	
 	$direccion = filter_input(INPUT_POST, 'dir');
 	$capacidad = filter_input(INPUT_POST, 'cap');
 	postSucursal($direccion,$capacidad);
+	var_dump("ww");
 	$datos = getIdSucursales();
 	foreach($datos as $ele){
 		$id = $ele['Cod_sucursal'];

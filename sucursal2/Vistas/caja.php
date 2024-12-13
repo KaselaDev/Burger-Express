@@ -13,15 +13,11 @@
 </html>
 <?php
 	include_once'../Modelos/consultas.php';
-	if($_SESSION['usuario']=="admin"){
-		include'header.php';
-	}
-	else{
-		include'user/header_user.php';
-	}
+	
 	date_default_timezone_set("AMerica/Argentina/Buenos_Aires");
 	$fecha = date("Y-m-d");
 	$caja = getCaja($fecha);
+	var_dump($caja);
 	if((!empty($caja))||($_SESSION['usuario']!="admin")){
 		if(cajaCerrada()===false){
 			echo"<div id='caja'><a href='../Controladores/cerrar_caja.php'>Cerrar caja</a><h3>Caja: $".$caja[0]['actual']."</h3></div>";

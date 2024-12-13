@@ -31,6 +31,7 @@
                                     <div style="background-color: lightgoldenrodyellow;border-color: yellow;cursor: move;" data-id="<?=$ele['idPedido']?>">
                                         Cliente: <?= $ele['cliente'] ?><br>
                                         Mesa: <?= $ele['mesa'] ?>
+                                        <br><a style="color: red;" href="ver_pedido.php?mesa=<?= $ele['mesa'] ?>">Ver pedido</a>
                                     </div>
                                     <?php 
                                     break;

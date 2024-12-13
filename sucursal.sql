@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 -- Base de datos: `sucursal`
 --
 
+CREATE DATABASE `sucursal`
+
 -- --------------------------------------------------------
 
 --
@@ -34,7 +36,7 @@ CREATE TABLE `caja` (
   `cierre` double DEFAULT 0,
   `encargado` varchar(50) NOT NULL,
   `Cod_sucursal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
 
 --
 -- Volcado de datos para la tabla `caja`
@@ -64,7 +66,7 @@ CREATE TABLE `empleados` (
   `Puesto` varchar(30) NOT NULL,
   `Sueldo` varchar(20) NOT NULL,
   `Cod_sucursal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `empleados`
@@ -86,7 +88,7 @@ CREATE TABLE `gastos` (
   `hora` time NOT NULL,
   `descripcion` text NOT NULL,
   `monto` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `gastos`
@@ -112,14 +114,14 @@ CREATE TABLE `infosucursal` (
   `btn` varchar(10) NOT NULL,
   `aside` varchar(10) NOT NULL,
   `aside_btn` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+)
 
 --
 -- Volcado de datos para la tabla `infosucursal`
 --
 
 INSERT INTO `infosucursal` (`id`, `nombre`, `logo`, `bg_color`, `header_color`, `table_color`, `font`, `btn`, `aside`, `aside_btn`) VALUES
-(1, 'Rapidash', 'iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAG7AAABuwE67OPiAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAWhQTFRF////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAz+t/MgAAAHd0Uk5TAAECAwQGCAkKCw4QEhQVFhgeICEiIyQmJykqMDE0Nzo9P0BBSElKS01QUVJTWFlbXl9gY2Vmb3Byd3h9f4CEhYiPkJGTlJWXmJygoqOorK2wtri5vsbIyszNz9fY2drd3uDi5ebn6eru7/Dx8vP09vf4+fv8/f6OzsdBAAACP0lEQVRYw+2WWVfTUBRGv4BY8ILiABWpiswF6ogWB0RBQFSwCFTUigQtgjK0QLv/vg9NWrqoNAlvLPZTVtb6dpJz7rm50hmnCKt1MOaDwVarPN+xik9WOw7n+3P4Jtdfyps0AUibomCAQAwUBaPATsT4ILIDjBYF40DKX9dSwPhpE+SzvsiXCWaCtXHGzbdkgwmyLY5gnoDMF/JRgOW4T5YBopJUbwMH7X7nv/0AsOsljQFM+d9BpgDGpPAeQOKdbxIAe2HNcSLmtHEywUbwHrqdbJxcSqaBTNLhJ5BNlvEd4EvZrQyQTi5NNh4dpleAXV7wKECz12msIBgBuB1cMLAP8LstqKB7r1CvXy3BBJ27bsXty1UENcbUHhXYpZ7NHi+4uAbr148Ibj0scu14QQSgp1IXvG6qXfF4r+UKzrWF/hduuuqhiGaR3Ujl/EtyI9UFQ8C3yjtJHraqCx4BhCsJXgC5uqqCMMATSQr1RB3u1EjSZ2DJw0L6AXyS1LVZWgd2s3QpDzz3IJgEMiEpcXj6n0n3AW56EPQB9EpvDwseSLPAuuVBUJ8B3kitC3k3nvkQUu0G8N7TMC0AdmzoghrMPYCwOa+22FOAu54E8cJjt7tLO5LzE841ehJEnRdfLAquOIfBTfkSJIqCpv3CnT++BF9vlD7h8XblN6ibBlbcE9xrYM2YQuVgyL0MG2M+AvDXGLMCTNcVjtkTW0H/KlsTlpwVE5Q+ScMnEQxLakgFz6caJMnqjAWk09IZp4N/uNoTspjbjScAAAAASUVORK5CYII=', '#87942e', '#a76c6c', '#422163', '#fffafa', '#150467', '#ba6969', '#f3b939');
+(1, 'Rapidash', 's', '#87942e', '#a76c6c', '#422163', '#fffafa', '#150467', '#ba6969', '#f3b939');
 
 -- --------------------------------------------------------
 
@@ -132,7 +134,7 @@ CREATE TABLE `mesas` (
   `Cod_sucursal` int(20) NOT NULL,
   `mesa` int(20) NOT NULL,
   `estado` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `mesas`
@@ -173,7 +175,7 @@ CREATE TABLE `pedido` (
   `mesa` varchar(30) NOT NULL,
   `estado` varchar(30) NOT NULL,
   `Cod_sucursal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `pedido`
@@ -235,7 +237,7 @@ CREATE TABLE `productos` (
   `Descripcion` text NOT NULL,
   `Costo` int(25) NOT NULL,
   `ingredientes` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -262,7 +264,7 @@ CREATE TABLE `promociones` (
   `productos` text NOT NULL,
   `descuento` int(11) NOT NULL,
   `fechaDuracion` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+)
 
 --
 -- Volcado de datos para la tabla `promociones`
@@ -285,7 +287,7 @@ CREATE TABLE `stock` (
   `Cod_sucursal` int(11) NOT NULL,
   `unidad_medicion` text NOT NULL,
   `aviso` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `stock`
@@ -341,7 +343,7 @@ CREATE TABLE `sucursales` (
   `Capacidad` int(10) NOT NULL,
   `Cod_supervisor` varchar(28) NOT NULL,
   `Fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Volcado de datos para la tabla `sucursales`

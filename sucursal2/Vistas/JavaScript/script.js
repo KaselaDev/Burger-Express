@@ -145,94 +145,98 @@ function modifyProducto(id,nombre,descr,precio) {
 *       FUNCIONES PEDIDOS
 *
 *********************************/
-function nombre(mesa){
-  (async()=>{
-    const { value: nombre } = await Swal.fire({
-      title: "Pedido",
-      icon: 'question',
-      input: 'text',
-      inputPlaceholder: "Ingrese nombre del pedido",
-      inputAutoFocus: true,
-      showCancelButton: true,
-      cancelButtonColor: "red",
-      confirmButtonColor: "green",
-      confirmButtonText: "Realizar",
-      position: 'center',
-    });
-
-    if (nombre) {
-        window.location.assign(`tomar_pedido.php?nom=${nombre}&mesa=${mesa}&ac=nuevo`);
-    }
-  })()
-}
-
-function addPedido(producto,mesa,id,nombre,sucursal) {
-    console.log(producto+id+mesa+nombre)
+// Función para pedir el nombre del cliente
+function nombre(mesa) {
+    (async () => {
+      try {
+        const { value: nombre } = await Swal.fire({
+          title: "Pedido",
+          icon: 'question',
+          input: 'text',
+          inputPlaceholder: "Ingrese nombre del pedido",
+          inputAutoFocus: true,
+          showCancelButton: true,
+          cancelButtonColor: "red",
+          confirmButtonColor: "green",
+          confirmButtonText: "Realizar",
+          position: 'center',
+        });
+  
+        if (nombre) {
+          window.location.assign(`tomar_pedido.php?nom=${nombre}&mesa=${mesa}&ac=nuevo`);
+        }
+      } catch (error) {
+        console.error("Error al obtener el nombre:", error);
+      }
+    })();
+  }
+  
+  // Función para agregar un producto al pedido
+  function addPedido(producto, mesa, id, nombre, sucursal) {
+    console.log(`Producto: ${producto}, ID: ${id}, Mesa: ${mesa}, Nombre: ${nombre}, Sucursal: ${sucursal}`);
     window.location.assign(`../../Controladores/agregar_pedido.php?pro=${producto}&mesa=${mesa}&id=${id}&nom=${nombre}&suc=${sucursal}`);
-}
-
-function eliminar_pedido(cod,accion,sucursal){
+  }
+  
+  // Función para eliminar un pedido
+  function eliminar_pedido(cod, accion, sucursal) {
     Swal.fire({
-        title: "Realmente desea eliminar este pedido?",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, Eliminarla!"
+      title: "Realmente desea eliminar este pedido?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, Eliminarla!"
     }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&ac=${accion}&suc=${sucursal}`
-        }
+      if (result.isConfirmed) {
+        window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&ac=${accion}&suc=${sucursal}`;
+      }
     });
-}
-
-function realizar_pedido(cod, id,sucursal){
+  }
+  
+  // Función para realizar un pedido
+  function realizar_pedido(cod, id, sucursal) {
     Swal.fire({
-        title: "Desea realizar el pedido?",
-        text: "",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, realizar"
+      title: "Desea realizar el pedido?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, realizar"
     }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = `../../Controladores/realizar_pedido.php?ubi=${cod}&id=${id}&suc=${sucursal}`
-        }
+      if (result.isConfirmed) {
+        window.location.href = `../../Controladores/realizar_pedido.php?ubi=${cod}&id=${id}&suc=${sucursal}`;
+      }
     });
-}
-
-function eliminar_pedidoProducto(cod,producto,accion) {
-    window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&pro=${producto}&ac=${accion}`
-}
-
-function ver_pedido(mesa,accion) {
-    if (accion == 'proceso') {
-        window.location.assign(`tomar_pedido.php?mesa=${mesa}&ac=ver`);
-    }
-    else if (accion == 'finalizado') {
-        window.location.assign(`ver_pedido.php?mesa=${mesa}`);
-    }
-
-}
-
-function limpiar_mesa(cod,id,sucursal){
+  }
+  
+  // Función para eliminar un producto del pedido
+  function eliminar_pedidoProducto(cod, producto, accion) {
+    window.location.href = `../../Controladores/eliminar_pedido.php?id=${cod}&pro=${producto}&ac=${accion}`;
+  }
+  
+  // Función para ver el pedido dependiendo del estado
+  function ver_pedido(mesa, accion) {
+    const url = accion === 'proceso' ? `tomar_pedido.php?mesa=${mesa}&ac=ver` : `ver_pedido.php?mesa=${mesa}`;
+    window.location.assign(url);
+  }
+  
+  // Función para limpiar la mesa
+  function limpiar_mesa(cod, id, sucursal) {
     Swal.fire({
-        title: "Desea desocupar la mesa?",
-        text: "",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, realizar"
+      title: "Desea desocupar la mesa?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, realizar"
     }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = `../../Controladores/limpiar_mesa.php?ubi=${cod}&id=${id}&suc=${sucursal}`
-        }
+      if (result.isConfirmed) {
+        window.location.href = `../../Controladores/limpiar_mesa.php?ubi=${cod}&id=${id}&suc=${sucursal}`;
+      }
     });
-}
+  }
 
+  
 
 /********************************
 *

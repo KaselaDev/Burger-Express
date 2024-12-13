@@ -87,7 +87,7 @@
                     $n=1;
                     $sql="WHERE";
                     foreach($tablaStock as $db){
-                        $color = ($n%2)!=0 ? ' ' : 'class="gray"';
+                        $color = ($n%2)!=0 ? "style='background-color: gold;'" : 'class="gray"';
                         echo '<tr '.$color.'>
                             <td>'.$db['Nombre'].'</td> 
                             <td>'.$db['Cantidad'].' '.$db['unidad_medicion'].'</td>
