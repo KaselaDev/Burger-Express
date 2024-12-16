@@ -1,8 +1,8 @@
 <?php
-	$user="KaselaSQL";
-	$psw="Sc091005";
-	$dbname="sucursal";
-	$host="localhost";
+	$user="agrega_tus_Credenciales";
+	$psw="agrega_tus_Credenciales";
+	$dbname="agrega_tus_Credenciales";
+	$host="agrega_tus_Credenciales";
 	try{
 		$dsn="mysql:host=localhost;dbname=$dbname";
 		$conexion = new PDO($dsn, $user, $psw);
