@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+}
+*::selection{
+    background-color: goldenrod;
+    color: #111;
+}
+a{
+    text-decoration: none;
+}
+
+html{
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
+
+.XHeader{
+    color: #BB8512;
+}
+header{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    width: 100vw;
+    height: 60px;
+    background-color: #111;
+    color: #fff;
+
+    nav{
+        display: flex;
+        gap: 0;
+        height: 1005;
+
+        a{
+            display: block;
+            color: #fff;
+            font-size: 24px;
+            padding: 8px;
+            height: 100%;
+
+            &:hover{
+                background-color: rgb(255, 234, 117);
+                color: #111;
+            }
+        }
+    }
+}
+
+
+.btnLogin{
+    background-color: #ff3636;
+    width: fit-content;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    transition: 150ms;
+
+    &:hover{
+        background-color: #965232;
+        transform: scale(1.05);
+    }
+}
+
+#inicio{
+    background-image: url(./imgs/background.png);
+    background-size: cover; /* Asegura que la imagen cubra toda el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    background-color: #f0f0f0;
+    height: 604px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8vw;
+    gap: 16px;
+
+    h2{
+        font-size: 80px;
+    }
+
+    h3{
+        font-size: 30px;
+    }
+}
+
+#que_es{
+    background-color: #F0DCAF;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 100px 75px;
+
+    h2{
+        font-size: 48px;
+    }
+    
+    p{
+        font-size: 26px;
+    }
+}
+
+#como_funciona{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 50px;
+
+    h2{
+        font-size: 48px;
+    }
+
+    .icons{
+        display: flex;
+        justify-content: space-between;
+        width: 40vw;
+
+        i{
+            font-size: 80px;
+            color: #BB8512;
+        }
+    }
+
+    p{
+        font-size: 24px;
+    }
+}
+
+#login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50vh;
+    background-image: url(./imgs/login.png);
+    background-size: cover; /* Asegura que la imagen cubra toda el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    background-color: #BB8512;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: #111;
+    color: #fff;
+
+    .top{
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 100px;
+        width: 100%;
+
+        .enlaces{
+
+            h3{
+                font-size: 28px;
+            }
+
+            a{
+                color: #fff;
+                font-size: 22px;
+            }
+        }
+
+        .redes{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+
+            .red{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                i{
+                    font-size: 28px;
+                    color: #BB8512;
+                }
+
+                a{
+                    color: #fff;
+                    font-size: 24px;
+                }
+
+                &:hover{
+                    a{
+                        color: gold;
+                    }
+                }
+                
+            }
+        }
+    }
+
+    .derechos{
+        font-size: 20px;
+    }
+}

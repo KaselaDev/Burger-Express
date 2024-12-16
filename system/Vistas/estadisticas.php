@@ -14,7 +14,7 @@
     <title>Estadisticas de ventas</title>
 </head>
 <body>
-	<section id="content">
+	<section id="content" class="estadisticasAdmin">
 	<aside>
 		<div id="buttons">
 			<form action="" method="post">

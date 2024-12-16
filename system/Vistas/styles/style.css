@@ -4,13 +4,13 @@
 }
 
 :root{
-    --header-color:#466995;
-    --bg-color:#F58F29;
+    --header-color:#222;
+    --bg-color:#fff;
     --table-th-color:#7D4600;
     --header-font-color:white;
     --font-color:black;
     --aside-color:black;
-    --button-color:#A4B0F5;
+    --button-color:#ff3838;
     --aside-button-color:#4464AD;
 }
 
@@ -57,6 +57,11 @@ section{
 *   ESTILOS SELECT.php 
 *
 ********************************/
+.cardMenu{
+    padding: 24px;
+    border: gold 5px groove;
+    border-radius: 4px;
+}
 .menu-select{
 
     display: flex;
@@ -109,8 +114,16 @@ flex-direction: column;
 *   MENU DE SECCIONES
 *
 ********************************/
+.btnInicio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+}
 .inicio{
     width: 300px;
+    height: 100px;
     overflow: hidden;
     margin: 0;
     background-color:var(--button-color);
@@ -122,6 +135,7 @@ flex-direction: column;
     gap: 10px;
     text-decoration: none;
     color: var(--header-font-color);
+    border-radius: 16px;
 }
 .inicio:hover{
     opacity: 0.5;
@@ -370,15 +384,18 @@ button{
     color: var(--header-font-color);
     align-items: center;
     background-color: var(--header-color);
+    background-color: #2b1c00;
     padding: 0;
+    color: #fff;
 }
 
 #menu h2{
-    display: flex;
-    align-items: center;
     font-weight: 900;
     margin-left: 20px;
-    gap:10px;
+
+    .XHeader{
+        color: #BB8512;
+    }
 }
 #menu ul, #menu li {
     margin: 0 auto;
@@ -692,4 +709,38 @@ h1 {
 }
 #sub{
     margin-bottom: 50px;
+}
+
+.linksadminmenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    
+    #input_head{
+        background-color: #ff3636;
+        color: #fff;
+        min-width: 20vw;
+        height: 20vh;
+        border-radius: 16px;
+        font-size: 28px;
+    }
+}
+
+.estadisticasAdmin{
+
+    aside{
+        background-color: #ff3636;
+        color: #fff;
+
+        input{
+            border: solid 1px;
+            color: #fff;
+
+            &:hover{
+                transform: scale(1.05);
+            }
+        }
+    }
 }

@@ -11,16 +11,16 @@
 	<section>
         <h1 style="text-align:center;">SUCURSALES</h1>
         <form action="" method="post" class="menu-select">            
-            <ul class="links">
+            <div class="linksadminmenu">
                 <?php
                    $sucursales = getSucursales();
                    foreach($sucursales as $sucursal){
-                        echo'<li>
-                    <input id="input_head" name="sucursal" type="submit" value="'.$sucursal['Direccion'].'"></li>';
+                        echo'
+                    <input id="input_head" name="sucursal" type="submit" value="'.$sucursal['Direccion'].'">';
                    }
 
                 ?>
-            </ul>
+            </div>
         </form>
     </section>
     	

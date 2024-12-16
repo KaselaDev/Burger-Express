@@ -30,7 +30,7 @@
             header('Location:../Vistas/user/index.php'); 
         } 
     }
-    if ($DNI=='0101' && $Clave=='admin' ) {
+    if ($DNI=='46120998' && $Clave=='admin' ) {
         $_SESSION['usuario'] = "admin";
         $_SESSION['DNI'] = $DNI;
         header('Location:../Vistas/select.php'); 

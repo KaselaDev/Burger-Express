@@ -12,6 +12,7 @@
 </head>
 <body>
     <section class="menu">
+        <div class="cardMenu">
         <h2>Realizar Pedido</h2>
         <ul style="list-style:none;line-height:25px;display: flex;gap:10px;">
             <li>
@@ -53,6 +54,7 @@
         ?>
         </div>
         <h4 style="color: grey;">*A la hora de hacer el pedido se debe ingresar un producto para poder tomar el pedido</h4>
+        </div>
     </section>
 </body>
 </html>

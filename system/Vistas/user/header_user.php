@@ -2,8 +2,7 @@
 <nav id='menu'>
   <div style="display: flex;margin-left: 20px;width: 30%;flex-direction: column;">
     <div style="display: flex;align-items: center;">
-      <img src="../imgs/logo.png" width="40" height="40">
-      <h2 style="margin:0"><?= $info[0]['nombre'] ?></h2> 
+      <h2 style="margin:0">Burger E<span class="XHeader">x</span>press</h2> 
     </div>
     <h4 style="color: white;"><?= isset($_SESSION['sucursal']) ? 'Sucursal: '.$_SESSION['sucursal'] : ''; ?></h4>     
   </div>

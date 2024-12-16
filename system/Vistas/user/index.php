@@ -10,6 +10,7 @@
 </head>
 <body>
     <section class="menu">
+        <div class="btnInicio">
         <a href="cola_pedidos.php" class="inicio">
             <span class="material-symbols-outlined">assignment</span>
             <h2>Pedidos</h2>
@@ -22,6 +23,7 @@
             <span class="material-symbols-outlined">monitoring</span>
             <h2>Stock</h2>
         </a>
+        </div>
     </section>
 </body>
 </html>
